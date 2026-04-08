@@ -3,31 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RIDA - Research Inputs and Development Action</title>
+  <title>RIDA - Scientific Research & Development Action</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  
   <style>
     :root {
-      --bg: #fafbfc;
-      --bg-dark: #0c1222;
-      --fg: #1a2332;
-      --fg-light: #5a6a7e;
-      --muted: #8a9aad;
-      --accent: #0a7ea4;
-      --accent-light: #0d9fc9;
-      --accent-dark: #086585;
-      --card: #ffffff;
-      --card-dark: #141e30;
-      --border: #e1e7ef;
-      --navy: #0c1222;
-      --navy-mid: #162033;
-      --navy-light: #1f2d42;
-      --teal: #0a7ea4;
-      --gold: #c4891c;
-      --gold-light: #e5a825;
-      --success: #059669;
+      --bg-body: #F0F4F8;
+      --bg-dark: #0B1120;
+      --fg: #1E293B;
+      --fg-light: #64748B;
+      --accent-blue: #2563EB;
+      --accent-cyan: #06B6D4;
+      --accent-purple: #7C3AED;
+      --accent-rose: #E11D48;
+      --accent-amber: #D97706;
+      --accent-green: #059669;
+      --card: #FFFFFF;
+      --card-glass: rgba(255, 255, 255, 0.7);
+      --border: #E2E8F0;
     }
 
     * {
@@ -41,1098 +37,629 @@
     }
 
     body {
-      font-family: 'Source Sans 3', sans-serif;
-      background: var(--bg);
+      font-family: 'Space Grotesk', sans-serif;
+      background-color: var(--bg-body);
       color: var(--fg);
       overflow-x: hidden;
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
-    h1, h2, h3, h4 {
-      font-family: 'DM Serif Display', serif;
-      font-weight: 400;
-      line-height: 1.2;
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Merriweather', serif;
+      font-weight: 700;
+      line-height: 1.3;
     }
 
-    /* Hero with layered depth */
-    .hero-section {
-      background: var(--navy);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-section::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: 
-        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(10, 126, 164, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse 60% 40% at 75% 20%, rgba(196, 137, 28, 0.08) 0%, transparent 45%),
-        radial-gradient(ellipse 50% 60% at 50% 90%, rgba(10, 126, 164, 0.1) 0%, transparent 40%);
-      pointer-events: none;
-    }
-
-    /* Animated grid pattern */
-    .grid-pattern {
-      position: absolute;
-      inset: 0;
+    /* Scientific Grid Background */
+    .grid-bg {
       background-image: 
-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
-      animation: gridMove 20s linear infinite;
+        linear-gradient(rgba(37, 99, 235, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37, 99, 235, 0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
     }
 
-    @keyframes gridMove {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(60px, 60px); }
+    /* Hero Mesh Gradient */
+    .hero-mesh {
+      background: 
+        radial-gradient(at 0% 0%, hsla(213, 94%, 56%, 0.3) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, hsla(189, 94%, 43%, 0.3) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, hsla(271, 91%, 55%, 0.2) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, hsla(340, 90%, 50%, 0.15) 0px, transparent 50%),
+        linear-gradient(180deg, #0B1120 0%, #1E293B 100%);
     }
 
-    /* Floating orbs */
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(60px);
-      animation: orbFloat 25s ease-in-out infinite;
-      pointer-events: none;
+    /* Animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(2deg); }
     }
 
-    @keyframes orbFloat {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(30px, -40px) scale(1.1); }
-      66% { transform: translate(-20px, 20px) scale(0.95); }
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.05); }
     }
 
-    /* Scroll reveal */
+    .animate-float { animation: float 6s ease-in-out infinite; }
+    .animate-pulse-slow { animation: pulse-slow 4s ease-in-out infinite; }
+    
     .reveal {
       opacity: 0;
       transform: translateY(30px);
-      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), 
-                  transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
-
+    
     .reveal.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
-    .reveal-delay-5 { transition-delay: 0.5s; }
-    .reveal-delay-6 { transition-delay: 0.6s; }
-    .reveal-delay-7 { transition-delay: 0.7s; }
-    .reveal-delay-8 { transition-delay: 0.8s; }
-
-    @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity: 1; transform: none; transition: none; }
-      .orb, .grid-pattern { animation: none; }
+    /* Navigation */
+    .nav-glass {
+      background: rgba(11, 17, 32, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    /* Navigation */
     .nav-link {
       position: relative;
-      color: rgba(255, 255, 255, 0.75);
-      font-weight: 500;
-      transition: color 0.25s ease;
+      transition: color 0.3s;
     }
 
     .nav-link::after {
       content: '';
       position: absolute;
-      bottom: -6px;
-      left: 0;
       width: 0;
       height: 2px;
-      background: var(--accent);
-      transition: width 0.3s ease;
+      bottom: -4px;
+      left: 0;
+      background: var(--accent-cyan);
+      transition: width 0.3s;
     }
 
-    .nav-link:hover { color: #ffffff; }
     .nav-link:hover::after { width: 100%; }
 
-    /* Cards */
-    .expertise-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.75rem;
-      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-    }
-
-    .expertise-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent), var(--gold));
-      border-radius: 16px 16px 0 0;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .expertise-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 40px -12px rgba(10, 126, 164, 0.15);
-      border-color: var(--accent);
-    }
-
-    .expertise-card:hover::before { opacity: 1; }
-
-    .icon-box {
-      width: 52px;
-      height: 52px;
-      background: linear-gradient(135deg, var(--accent), var(--accent-light));
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1.25rem;
-      transition: transform 0.3s ease;
-    }
-
-    .expertise-card:hover .icon-box {
-      transform: scale(1.1) rotate(-3deg);
-    }
-
-    /* Project cards */
-    .project-card {
-      background: var(--card);
-      border-radius: 20px;
-      overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      border: 1px solid var(--border);
-    }
-
-    .project-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-    }
-
-    .project-tag {
-      display: inline-block;
-      padding: 0.35rem 0.85rem;
-      background: rgba(10, 126, 164, 0.1);
-      color: var(--accent);
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    /* Team cards */
-    .team-card {
+    /* Cards & Components */
+    .card-3d {
       background: var(--card);
       border-radius: 16px;
-      padding: 2rem;
-      text-align: center;
-      border: 1px solid var(--border);
-      transition: all 0.35s ease;
+      box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+        0 10px 15px -3px rgba(0, 0, 0, 0.05),
+        inset 0 -2px 0 0 rgba(0,0,0,0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 1px solid rgba(255,255,255,0.5);
     }
 
-    .team-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 15px 30px -10px rgba(10, 126, 164, 0.12);
-      border-color: var(--accent);
+    .card-3d:hover {
+      transform: translateY(-5px);
+      box-shadow: 
+        0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+        0 10px 10px -5px rgba(0, 0, 0, 0.04);
     }
 
-    .team-avatar {
-      width: 80px;
-      height: 80px;
-      background: linear-gradient(135deg, var(--navy-light), var(--navy-mid));
-      border-radius: 50%;
-      margin: 0 auto 1.25rem;
+    .service-icon-box {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
-    }
-
-    .team-avatar::after {
-      content: '';
-      position: absolute;
-      inset: -4px;
-      border-radius: 50%;
-      border: 2px solid var(--accent);
-      opacity: 0.3;
-    }
-
-    /* Testimonial */
-    .testimonial-card {
-      background: var(--card);
-      border-radius: 20px;
-      padding: 2.5rem;
-      position: relative;
-      border: 1px solid var(--border);
-      transition: all 0.3s ease;
-    }
-
-    .testimonial-card:hover {
-      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.1);
-    }
-
-    .testimonial-card::before {
-      content: '"';
-      font-family: 'DM Serif Display', serif;
-      font-size: 6rem;
-      position: absolute;
-      top: -10px;
-      left: 20px;
-      color: var(--accent);
-      opacity: 0.12;
-      line-height: 1;
-    }
-
-    /* Buttons */
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-      color: white;
-      padding: 0.9rem 2rem;
-      border-radius: 10px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      position: relative;
       overflow: hidden;
     }
 
-    .btn-primary::before {
+    .service-icon-box::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, var(--accent-light), var(--accent));
-      opacity: 0;
-      transition: opacity 0.3s ease;
+      background: inherit;
+      opacity: 0.15;
+      filter: blur(10px);
+      transform: scale(2);
+    }
+
+    /* Section Styling */
+    .section-title {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+      border-radius: 2px;
+    }
+
+    /* Button */
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+      color: white;
+      padding: 12px 28px;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 30px -8px rgba(10, 126, 164, 0.5);
+      box-shadow: 0 7px 20px rgba(37, 99, 235, 0.4);
     }
 
-    .btn-primary:hover::before { opacity: 1; }
-    .btn-primary span { position: relative; z-index: 1; }
-
-    .btn-outline {
-      border: 2px solid rgba(255,255,255,0.3);
-      color: white;
-      padding: 0.9rem 2rem;
-      border-radius: 10px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      background: transparent;
-    }
-
-    .btn-outline:hover {
-      background: white;
-      color: var(--navy);
-      border-color: white;
-    }
-
-    /* Section divider */
-    .section-accent {
-      width: 70px;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent), var(--gold));
-      border-radius: 2px;
-    }
-
-    /* Stats */
-    .stat-value {
-      font-family: 'DM Serif Display', serif;
-      font-size: 3rem;
-      background: linear-gradient(135deg, #ffffff, var(--accent-light));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    /* Mobile menu */
-    .mobile-nav {
-      position: fixed;
-      inset: 0;
-      background: var(--navy);
-      z-index: 100;
+    /* Mobile Menu */
+    .mobile-drawer {
       transform: translateX(100%);
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
+    .mobile-drawer.open { transform: translateX(0); }
 
-    .mobile-nav.open { transform: translateX(0); }
-
-    /* Focus states */
-    a:focus-visible, button:focus-visible {
-      outline: 2px solid var(--accent);
-      outline-offset: 3px;
+    /* Counter styling */
+    .counter-box {
+      position: relative;
     }
-
-    /* Custom scrollbar */
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
-
-    /* Thematic tag pills */
-    .thematic-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 25px;
-      font-size: 0.875rem;
-      color: var(--fg);
-      transition: all 0.25s ease;
-    }
-
-    .thematic-pill:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: rgba(10, 126, 164, 0.05);
-    }
-
-    /* Publication cards */
-    .pub-card {
-      background: linear-gradient(135deg, var(--navy-mid), var(--navy-light));
-      border-radius: 12px;
-      padding: 1.5rem;
-      border: 1px solid rgba(255,255,255,0.08);
-      transition: all 0.3s ease;
-    }
-
-    .pub-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--accent);
+    .counter-box::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      border-radius: 20px;
+      z-index: -1;
+      opacity: 0.5;
     }
   </style>
 </head>
-<body>
+<body class="grid-bg">
+
   <!-- Navigation -->
-  <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="mainNav">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-      <div class="flex items-center justify-between">
-        <a href="#home" class="flex items-center gap-3">
-          <div class="w-11 h-11 bg-gradient-to-br from-teal to-accent-light rounded-xl flex items-center justify-center shadow-lg">
-            <span class="text-white font-semibold text-lg" style="font-family: 'DM Serif Display', serif;">R</span>
+  <nav class="nav-glass fixed w-full z-50 top-0" id="navbar">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center shadow-lg relative">
+            <span class="text-white text-2xl font-bold" style="font-family: 'Merriweather', serif;">R</span>
+            <div class="absolute w-full h-full rounded-xl border border-white/30 top-0 left-0"></div>
           </div>
           <div class="hidden sm:block">
-            <span class="text-white font-semibold text-lg tracking-tight">RIDA</span>
-            <span class="block text-xs text-gray-400 -mt-0.5">Est. 1980</span>
+            <span class="text-white text-lg font-bold tracking-tight">RIDA</span>
+            <span class="block text-xs text-cyan-300/80 -mt-1">Scientific Research</span>
           </div>
         </a>
 
-        <!-- Desktop nav -->
+        <!-- Desktop Links -->
         <div class="hidden lg:flex items-center gap-8">
-          <a href="#home" class="nav-link text-sm">Home</a>
-          <a href="#about" class="nav-link text-sm">About</a>
-          <a href="#expertise" class="nav-link text-sm">Our Focus</a>
-          <a href="#work" class="nav-link text-sm">Our Work</a>
-          <a href="#team" class="nav-link text-sm">Our Team</a>
-          <a href="#testimonials" class="nav-link text-sm">Testimonials</a>
-          <a href="#contact" class="btn-primary text-sm"><span>Contact</span></a>
+          <a href="#about" class="nav-link text-gray-300 text-sm font-medium hover:text-white">About</a>
+          <a href="#expertise" class="nav-link text-gray-300 text-sm font-medium hover:text-white">Expertise</a>
+          <a href="#work" class="nav-link text-gray-300 text-sm font-medium hover:text-white">Projects</a>
+          <a href="#team" class="nav-link text-gray-300 text-sm font-medium hover:text-white">Team</a>
+          <a href="#contact" class="btn-primary text-sm">Start Collaboration</a>
         </div>
 
-        <!-- Mobile button -->
-        <button class="lg:hidden text-white p-2" id="menuToggle" aria-label="Open navigation menu">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
+        <!-- Mobile Toggle -->
+        <button id="menuBtn" class="lg:hidden text-white p-2 focus:outline-none" aria-label="Open menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
         </button>
       </div>
     </div>
   </nav>
 
-  <!-- Mobile Navigation -->
-  <div class="mobile-nav lg:hidden" id="mobileNav">
+  <!-- Mobile Drawer -->
+  <div id="mobileDrawer" class="mobile-drawer fixed inset-0 z-60 bg-gray-900/95 backdrop-blur-lg lg:hidden">
     <div class="p-6 h-full flex flex-col">
       <div class="flex justify-between items-center mb-10">
-        <div class="flex items-center gap-3">
-          <div class="w-11 h-11 bg-gradient-to-br from-teal to-accent-light rounded-xl flex items-center justify-center">
-            <span class="text-white font-semibold text-lg" style="font-family: 'DM Serif Display', serif;">R</span>
-          </div>
-          <span class="text-white font-semibold text-lg">RIDA</span>
-        </div>
-        <button id="closeNav" class="text-white p-2" aria-label="Close navigation menu">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
+        <span class="text-white font-bold text-xl">Menu</span>
+        <button id="closeBtn" class="text-white p-2" aria-label="Close menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
       </div>
-      <nav class="flex flex-col gap-5 flex-1">
-        <a href="#home" class="text-white text-2xl font-medium nav-item">Home</a>
-        <a href="#about" class="text-white text-2xl font-medium nav-item">About</a>
-        <a href="#expertise" class="text-white text-2xl font-medium nav-item">Our Focus</a>
-        <a href="#work" class="text-white text-2xl font-medium nav-item">Our Work</a>
-        <a href="#team" class="text-white text-2xl font-medium nav-item">Our Team</a>
-        <a href="#testimonials" class="text-white text-2xl font-medium nav-item">Testimonials</a>
-        <a href="#contact" class="text-white text-2xl font-medium nav-item">Contact</a>
-      </nav>
-      <div class="pt-6 border-t border-white/10">
-        <p class="text-accent text-sm font-medium">Looking for internship? Give us a call.</p>
+      <div class="flex flex-col gap-6">
+        <a href="#about" class="text-white text-2xl font-medium mobile-link">About Us</a>
+        <a href="#expertise" class="text-white text-2xl font-medium mobile-link">Expertise</a>
+        <a href="#work" class="text-white text-2xl font-medium mobile-link">Projects</a>
+        <a href="#team" class="text-white text-2xl font-medium mobile-link">Our Team</a>
+        <a href="#contact" class="text-white text-2xl font-medium mobile-link">Contact</a>
+      </div>
+      <div class="mt-auto pb-8">
+        <p class="text-cyan-400 font-semibold">Internships Available</p>
+        <p class="text-gray-400 text-sm mt-1">Call us to learn more.</p>
       </div>
     </div>
   </div>
 
   <!-- Hero Section -->
-  <section id="home" class="hero-section min-h-screen flex items-center relative">
-    <div class="grid-pattern"></div>
+  <section id="home" class="hero-mesh min-h-screen flex items-center relative overflow-hidden pt-20">
+    <!-- Decorative Elements -->
+    <div class="absolute top-20 left-10 w-64 h-64 bg-blue-500/10 rounded-full filter blur-3xl animate-pulse-slow"></div>
+    <div class="absolute bottom-20 right-10 w-72 h-72 bg-purple-500/10 rounded-full filter blur-3xl animate-pulse-slow" style="animation-delay: 2s;"></div>
     
-    <!-- Orbs -->
-    <div class="orb" style="width: 400px; height: 400px; background: rgba(10, 126, 164, 0.2); top: -100px; left: -100px;"></div>
-    <div class="orb" style="width: 300px; height: 300px; background: rgba(196, 137, 28, 0.15); bottom: -50px; right: -50px; animation-delay: -8s;"></div>
-    <div class="orb" style="width: 200px; height: 200px; background: rgba(10, 126, 164, 0.15); top: 40%; right: 20%; animation-delay: -15s;"></div>
+    <!-- Floating Geometric Shapes -->
+    <div class="hidden md:block absolute top-1/4 right-1/4 w-20 h-20 border-2 border-cyan-400/30 rounded-lg rotate-45 animate-float"></div>
+    <div class="hidden md:block absolute bottom-1/3 left-1/5 w-16 h-16 border-2 border-blue-400/30 rounded-full animate-float" style="animation-delay: 1s;"></div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 relative z-10">
-      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-        <div>
-          <div class="reveal">
-            <span class="inline-flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full text-accent-light text-sm font-medium backdrop-blur-sm mb-6">
-              <span class="w-2 h-2 bg-success rounded-full animate-pulse"></span>
-              Over 40 Years of Excellence
-            </span>
-          </div>
-          
-          <h1 class="reveal reveal-delay-1 text-4xl sm:text-5xl lg:text-6xl text-white leading-tight mb-5">
-            Research Inputs and Development Action
-          </h1>
-          
-          <p class="reveal reveal-delay-2 text-xl sm:text-2xl text-accent-light mb-5" style="font-family: 'DM Serif Display', serif;">
-            Advancing Evidence Based Research
-          </p>
-          
-          <p class="reveal reveal-delay-3 text-gray-300 text-lg leading-relaxed mb-8 max-w-xl">
-            Promoting evidence-based planning and implementation of development interventions through research inputs at various stages of the project cycle. Serving clients across South Asia, Asia-Pacific, and Africa since 1980.
-          </p>
-          
-          <div class="reveal reveal-delay-4 flex flex-wrap gap-4">
-            <a href="#about" class="btn-primary"><span>Discover Our Work</span></a>
-            <a href="#contact" class="btn-outline">Get in Touch</a>
-          </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center relative z-10">
+      <div>
+        <div class="reveal">
+          <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-cyan-300 text-xs font-semibold uppercase tracking-widest mb-6 backdrop-blur-sm">
+            <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+            Est. 1980
+          </span>
         </div>
+        
+        <h1 class="reveal reveal-delay-1 text-4xl md:text-5xl lg:text-6xl text-white font-bold mb-6 leading-tight tracking-tight">
+          Research Inputs &<br>
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-blue-500">Development Action</span>
+        </h1>
+        
+        <p class="reveal reveal-delay-2 text-lg text-gray-300 mb-8 max-w-lg leading-relaxed">
+          Advancing evidence-based development initiatives across South Asia, Asia-Pacific, and Africa through rigorous scientific research and advocacy.
+        </p>
 
-        <!-- Stats Grid -->
-        <div class="reveal reveal-delay-5 grid grid-cols-2 gap-4 sm:gap-6">
-          <div class="bg-white/5 border border-white/10 rounded-2xl p-5 sm:p-6 backdrop-blur-sm">
-            <div class="stat-value" data-count="40">0</div>
-            <p class="text-gray-400 mt-1 text-sm sm:text-base">Years of Excellence</p>
-          </div>
-          <div class="bg-white/5 border border-white/10 rounded-2xl p-5 sm:p-6 backdrop-blur-sm">
-            <div class="stat-value" data-count="500">0</div>
-            <p class="text-gray-400 mt-1 text-sm sm:text-base">Projects Delivered</p>
-          </div>
-          <div class="bg-white/5 border border-white/10 rounded-2xl p-5 sm:p-6 backdrop-blur-sm">
-            <div class="stat-value" data-count="30">0</div>
-            <p class="text-gray-400 mt-1 text-sm sm:text-base">Countries Reached</p>
-          </div>
-          <div class="bg-white/5 border border-white/10 rounded-2xl p-5 sm:p-6 backdrop-blur-sm">
-            <div class="stat-value" data-count="100">0</div>
-            <p class="text-gray-400 mt-1 text-sm sm:text-base">Expert Pool</p>
-          </div>
+        <div class="reveal reveal-delay-3 flex flex-wrap gap-4">
+          <a href="#expertise" class="btn-primary">
+            Explore Our Research
+          </a>
+          <a href="#contact" class="px-6 py-3 rounded-xl border border-white/20 text-white font-medium hover:bg-white/10 transition-colors backdrop-blur-sm">
+            Contact Us
+          </a>
         </div>
       </div>
-    </div>
 
-    <!-- Scroll cue -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40">
-      <span class="text-xs uppercase tracking-widest">Scroll</span>
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="animate-bounce">
-        <path d="M12 5v14M19 12l-7 7-7-7"/>
-      </svg>
+      <!-- Stats & Visualization -->
+      <div class="reveal reveal-delay-4 grid grid-cols-2 gap-5">
+        <div class="counter-box bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 hover:border-cyan-400/50 transition-colors">
+          <h3 class="text-4xl text-white font-bold counter" data-target="40">0</h3>
+          <p class="text-cyan-300 text-sm mt-1 uppercase tracking-wider">Years Active</p>
+        </div>
+        <div class="counter-box bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 hover:border-purple-400/50 transition-colors">
+          <h3 class="text-4xl text-white font-bold counter" data-target="30">0</h3>
+          <p class="text-purple-300 text-sm mt-1 uppercase tracking-wider">Countries</p>
+        </div>
+        <div class="counter-box bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 hover:border-rose-400/50 transition-colors">
+          <h3 class="text-4xl text-white font-bold counter" data-target="500">0</h3>
+          <p class="text-rose-300 text-sm mt-1 uppercase tracking-wider">Projects</p>
+        </div>
+        <div class="counter-box bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 hover:border-amber-400/50 transition-colors">
+          <h3 class="text-4xl text-white font-bold counter" data-target="100">0</h3>
+          <p class="text-amber-300 text-sm mt-1 uppercase tracking-wider">Experts</p>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- About Section -->
-  <section id="about" class="py-20 lg:py-28 bg-white relative overflow-hidden">
-    <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-gray-50 to-transparent pointer-events-none"></div>
+  <section id="about" class="py-24 bg-white relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-50" style="background-image: radial-gradient(#E2E8F0 1px, transparent 1px); background-size: 20px 20px;"></div>
     
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
         <div>
-          <span class="reveal text-accent font-semibold text-sm uppercase tracking-widest">About RIDA</span>
-          <h2 class="reveal reveal-delay-1 text-3xl sm:text-4xl lg:text-5xl text-navy mt-4 mb-6">
-            Pioneering Evidence-Based Development Research
-          </h2>
-          <div class="section-accent reveal reveal-delay-2 mb-8"></div>
+          <div class="reveal section-title mb-4">
+            <span class="text-sm font-bold text-blue-600 uppercase tracking-widest">Who We Are</span>
+            <h2 class="text-3xl md:text-4xl lg:text-5xl text-gray-900 mt-2">
+              Pioneering Development Research Since 1980
+            </h2>
+          </div>
           
-          <p class="reveal reveal-delay-3 text-gray-600 text-lg leading-relaxed mb-6">
-            Research Inputs and Development Action (RIDA) is a Nepal-based international research firm established in 1980 and registered as a Private Limited company on August 10, 2007. We specialize in research, evaluation, assessment, and advocacy for development initiatives.
+          <p class="reveal reveal-delay-1 text-gray-600 text-lg mt-8 mb-6">
+            RIDA is a Nepal-based international research firm registered as a Private Limited company. We specialize in generating actionable evidence for policy and development.
           </p>
 
-          <div class="reveal reveal-delay-4 bg-gray-50 border border-gray-100 rounded-xl p-5 mb-6">
-            <h4 class="font-semibold text-navy mb-2 flex items-center gap-2">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-accent">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M12 16v-4M12 8h.01"/>
-              </svg>
-              Our Vision
-            </h4>
-            <p class="text-gray-600 text-sm leading-relaxed">
-              To promote evidence-based planning and implementation of development interventions through research inputs at various stages of the project cycle.
-            </p>
-          </div>
-
-          <div class="reveal reveal-delay-5 bg-accent/5 border border-accent/20 rounded-xl p-5">
-            <h4 class="font-semibold text-navy mb-2 flex items-center gap-2">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-accent">
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                <polyline points="22 4 12 14.01 9 11.01"/>
-              </svg>
-              Our Mission
-            </h4>
-            <p class="text-gray-600 text-sm leading-relaxed">
-              Empowering people and communities by improving their socio-economic condition in an equitable way through research and action in education, health, economy, and information technology.
-            </p>
-          </div>
-        </div>
-
-        <!-- Info Cards -->
-        <div class="reveal reveal-delay-3 space-y-5">
-          <div class="bg-gradient-to-br from-navy to-navy-mid rounded-2xl p-6 text-white">
-            <div class="flex items-start gap-4">
-              <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-accent-light">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                  <circle cx="12" cy="10" r="3"/>
-                </svg>
-              </div>
+          <div class="reveal reveal-delay-2 space-y-4 mt-8">
+            <div class="flex items-start gap-4 p-4 bg-blue-50 rounded-xl border-l-4 border-blue-600">
+              <svg class="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
               <div>
-                <h4 class="font-semibold text-lg mb-2">Global Presence</h4>
-                <p class="text-gray-300 text-sm mb-3">Operating across three major regions with strategic international offices.</p>
-                <div class="flex flex-wrap gap-2">
-                  <span class="px-3 py-1 bg-white/10 rounded-full text-xs">South Asia</span>
-                  <span class="px-3 py-1 bg-white/10 rounded-full text-xs">Asia-Pacific</span>
-                  <span class="px-3 py-1 bg-white/10 rounded-full text-xs">Africa</span>
-                </div>
+                <h4 class="font-bold text-gray-900">Our Vision</h4>
+                <p class="text-sm text-gray-600">Promoting evidence-based planning and implementation of development interventions.</p>
               </div>
             </div>
-          </div>
-
-          <div class="bg-gray-50 border border-gray-100 rounded-2xl p-6">
-            <div class="flex items-start gap-4">
-              <div class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-accent">
-                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                  <line x1="16" y1="2" x2="16" y2="6"/>
-                  <line x1="8" y1="2" x2="8" y2="6"/>
-                  <line x1="3" y1="10" x2="21" y2="10"/>
-                </svg>
-              </div>
+            <div class="flex items-start gap-4 p-4 bg-green-50 rounded-xl border-l-4 border-green-600">
+              <svg class="w-6 h-6 text-green-600 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
               <div>
-                <h4 class="font-semibold text-navy mb-1">Established Legacy</h4>
-                <p class="text-gray-600 text-sm">Founded in 1980, incorporated August 10, 2007</p>
-                <p class="text-gray-500 text-xs mt-1">Reg No: 48616/064/65 | PAN/VAT: 30274861</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="bg-gray-50 border border-gray-100 rounded-2xl p-6">
-            <div class="flex items-start gap-4">
-              <div class="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gold">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                  <circle cx="9" cy="7" r="4"/>
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                </svg>
-              </div>
-              <div>
-                <h4 class="font-semibold text-navy mb-1">Leadership</h4>
-                <p class="text-gray-600 text-sm">Executive Chairperson: Pankaj Raj Joshi</p>
-                <p class="text-gray-500 text-xs mt-1">Guiding strategic vision since inception</p>
+                <h4 class="font-bold text-gray-900">Our Mission</h4>
+                <p class="text-sm text-gray-600">Empowering people by improving socio-economic conditions through research in education, health, economy, and IT.</p>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- Thematic Areas Section -->
-  <section class="py-20 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-14">
-        <span class="reveal text-accent font-semibold text-sm uppercase tracking-widest">Thematic Areas</span>
-        <h2 class="reveal reveal-delay-1 text-3xl sm:text-4xl lg:text-5xl text-navy mt-4 mb-6">
-          Sectors We Serve
-        </h2>
-        <div class="section-accent reveal reveal-delay-2 mx-auto mb-6"></div>
-        <p class="reveal reveal-delay-3 text-gray-600 text-lg">
-          Deep expertise across critical development sectors, driving impactful research and interventions.
-        </p>
-      </div>
-
-      <div class="flex flex-wrap justify-center gap-3 reveal reveal-delay-4">
-        <span class="thematic-pill">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-          Education (incl. ECCD)
-        </span>
-        <span class="thematic-pill">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          Health and Nutrition
-        </span>
-        <span class="thematic-pill">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
-          WASH
-        </span>
-        <span class="thematic-pill">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
-          Livelihood
-        </span>
-        <span class="thematic-pill">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          ICT for Development
-        </span>
-        <span class="thematic-pill">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          Agriculture & Environment
-        </span>
-        <span class="thematic-pill">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"/><path d="M9 8h1"/><path d="M9 12h1"/><path d="M9 16h1"/><path d="M14 8h1"/><path d="M14 12h1"/><path d="M14 16h1"/><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/></svg>
-          Governance & Local Development
-        </span>
-        <span class="thematic-pill">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>
-          Climate Change
-        </span>
+        <!-- Global Presence Map Placeholder -->
+        <div class="reveal reveal-delay-3 relative">
+          <div class="bg-gradient-to-br from-gray-50 to-blue-50 rounded-3xl p-8 border border-gray-100 shadow-2xl shadow-blue-100/50">
+            <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+              <svg class="w-5 h-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              Global Footprint
+            </h3>
+            
+            <!-- Abstract Map Dots -->
+            <div class="relative h-64 bg-white rounded-xl border border-gray-200 overflow-hidden">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/World_map_blank_without_borders.svg/1280px-World_map_blank_without_borders.svg.png" class="w-full h-full object-contain opacity-20" alt="World Map">
+              
+              <!-- Location Dots -->
+              <div class="absolute top-1/2 left-1/4 transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer">
+                <div class="w-4 h-4 bg-blue-600 rounded-full animate-ping absolute opacity-75"></div>
+                <div class="w-4 h-4 bg-blue-600 rounded-full relative z-10 border-2 border-white"></div>
+                <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Nepal (HQ)</div>
+              </div>
+              
+              <div class="absolute top-1/3 left-1/5 transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer">
+                <div class="w-3 h-3 bg-purple-500 rounded-full border-2 border-white"></div>
+                <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">USA Office</div>
+              </div>
+              
+              <div class="absolute top-1/2 left-3/4 transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer">
+                <div class="w-3 h-3 bg-rose-500 rounded-full border-2 border-white"></div>
+                <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Bangladesh Office</div>
+              </div>
+              
+              <div class="absolute top-2/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer">
+                 <div class="w-3 h-3 bg-amber-500 rounded-full border-2 border-white"></div>
+                 <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Africa Operations</div>
+              </div>
+            </div>
+            
+            <div class="flex justify-center gap-6 mt-6 text-xs font-semibold">
+              <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-blue-600"></span> South Asia</div>
+              <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-purple-500"></span> Asia-Pacific</div>
+              <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-amber-500"></span> Africa</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Expertise Section -->
-  <section id="expertise" class="py-20 lg:py-28 bg-white">
+  <section id="expertise" class="py-24 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-14">
-        <span class="reveal text-accent font-semibold text-sm uppercase tracking-widest">Our Expertise</span>
-        <h2 class="reveal reveal-delay-1 text-3xl sm:text-4xl lg:text-5xl text-navy mt-4 mb-6">
-          Core Service Offerings
-        </h2>
-        <div class="section-accent reveal reveal-delay-2 mx-auto mb-6"></div>
-        <p class="reveal reveal-delay-3 text-gray-600 text-lg">
-          Comprehensive research and consulting services tailored to development challenges.
-        </p>
+      <div class="text-center mb-16">
+        <span class="reveal text-sm font-bold text-cyan-600 uppercase tracking-widest">What We Do</span>
+        <h2 class="reveal reveal-delay-1 text-3xl md:text-4xl lg:text-5xl text-gray-900 mt-2">Core Service Expertise</h2>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Card 1 -->
-        <div class="expertise-card reveal">
-          <div class="icon-box">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-              <polyline points="14 2 14 8 20 8"/>
-              <line x1="16" y1="13" x2="8" y2="13"/>
-              <line x1="16" y1="17" x2="8" y2="17"/>
-            </svg>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Service 1 -->
+        <div class="reveal card-3d p-6 hover:border-blue-500/30 border-transparent border">
+          <div class="service-icon-box bg-blue-100 text-blue-600 mb-4">
+            <svg class="w-7 h-7 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
           </div>
-          <h3 class="text-xl text-navy mb-2">Development Policy Research & Advocacy</h3>
-          <p class="text-gray-600 text-sm leading-relaxed">Evidence-based policy analysis and strategic advocacy to shape development agendas at national and regional levels.</p>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Development Policy Research</h3>
+          <p class="text-sm text-gray-600">Evidence-based policy analysis and strategic advocacy to shape development agendas.</p>
         </div>
 
-        <!-- Card 2 -->
-        <div class="expertise-card reveal reveal-delay-1">
-          <div class="icon-box">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-              <polyline points="22 4 12 14.01 9 11.01"/>
-            </svg>
+        <!-- Service 2 -->
+        <div class="reveal reveal-delay-1 card-3d p-6 hover:border-green-500/30 border-transparent border">
+          <div class="service-icon-box bg-green-100 text-green-600 mb-4">
+            <svg class="w-7 h-7 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
           </div>
-          <h3 class="text-xl text-navy mb-2">Monitoring and Evaluation</h3>
-          <p class="text-gray-600 text-sm leading-relaxed">Comprehensive M&E services including Baseline, Endline, and Third-Party Monitoring to measure program effectiveness.</p>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Monitoring & Evaluation</h3>
+          <p class="text-sm text-gray-600">Comprehensive M&E frameworks, Baseline, Endline, and Third-Party Monitoring.</p>
         </div>
 
-        <!-- Card 3 -->
-        <div class="expertise-card reveal reveal-delay-2">
-          <div class="icon-box">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-              <line x1="18" y1="20" x2="18" y2="10"/>
-              <line x1="12" y1="20" x2="12" y2="4"/>
-              <line x1="6" y1="20" x2="6" y2="14"/>
-            </svg>
+        <!-- Service 3 -->
+        <div class="reveal reveal-delay-2 card-3d p-6 hover:border-purple-500/30 border-transparent border">
+          <div class="service-icon-box bg-purple-100 text-purple-600 mb-4">
+            <svg class="w-7 h-7 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path></svg>
           </div>
-          <h3 class="text-xl text-navy mb-2">Qualitative & Quantitative Research</h3>
-          <p class="text-gray-600 text-sm leading-relaxed">Rigorous mixed-methods research combining statistical analysis with in-depth qualitative insights for comprehensive understanding.</p>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Quantitative & Qualitative Research</h3>
+          <p class="text-sm text-gray-600">Rigorous mixed-methods studies combining statistical depth with narrative insights.</p>
         </div>
 
-        <!-- Card 4 -->
-        <div class="expertise-card reveal reveal-delay-3">
-          <div class="icon-box">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-            </svg>
+        <!-- Service 4 -->
+        <div class="reveal reveal-delay-3 card-3d p-6 hover:border-rose-500/30 border-transparent border">
+          <div class="service-icon-box bg-rose-100 text-rose-600 mb-4">
+            <svg class="w-7 h-7 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
           </div>
-          <h3 class="text-xl text-navy mb-2">Behavior Change Communication</h3>
-          <p class="text-gray-600 text-sm leading-relaxed">Strategic BCC interventions designed to influence behaviors and improve development outcomes in health, education, and livelihoods.</p>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Behavior Change Communication</h3>
+          <p class="text-sm text-gray-600">Strategic BCC to influence positive behaviors in health, education, and livelihoods.</p>
         </div>
 
-        <!-- Card 5 -->
-        <div class="expertise-card reveal reveal-delay-4">
-          <div class="icon-box">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-              <line x1="12" y1="1" x2="12" y2="23"/>
-              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-            </svg>
+        <!-- Service 5 -->
+        <div class="reveal reveal-delay-4 card-3d p-6 hover:border-amber-500/30 border-transparent border">
+          <div class="service-icon-box bg-amber-100 text-amber-600 mb-4">
+            <svg class="w-7 h-7 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
           </div>
-          <h3 class="text-xl text-navy mb-2">Financial, Economic & Social Analysis</h3>
-          <p class="text-gray-600 text-sm leading-relaxed">In-depth analysis of economic and social dynamics to inform investment decisions and policy frameworks.</p>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Financial & Economic Analysis</h3>
+          <p class="text-sm text-gray-600">In-depth economic and social analysis for informed policy and investment decisions.</p>
         </div>
 
-        <!-- Card 6 -->
-        <div class="expertise-card reveal reveal-delay-5">
-          <div class="icon-box">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
-              <path d="M3 3v18h18"/>
-              <path d="M18 17V9"/>
-              <path d="M13 17V5"/>
-              <path d="M8 17v-3"/>
-            </svg>
+        <!-- Service 6 -->
+        <div class="reveal reveal-delay-5 card-3d p-6 hover:border-cyan-500/30 border-transparent border">
+          <div class="service-icon-box bg-cyan-100 text-cyan-600 mb-4">
+            <svg class="w-7 h-7 relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
           </div>
-          <h3 class="text-xl text-navy mb-2">Identification of Poor & Proxy Means Testing</h3>
-          <p class="text-gray-600 text-sm leading-relaxed">Scientific identification methodologies and targeting mechanisms for social protection programs.</p>
+          <h3 class="text-lg font-bold text-gray-900 mb-2">Proxy Means Testing</h3>
+          <p class="text-sm text-gray-600">Scientific identification of the poor and targeting mechanisms for social protection.</p>
+        </div>
+      </div>
+
+      <!-- Thematic Areas -->
+      <div class="mt-20 pt-12 border-t border-gray-200">
+        <h3 class="reveal text-center text-2xl font-bold text-gray-800 mb-8">Thematic Sectors</h3>
+        <div class="reveal reveal-delay-1 flex flex-wrap justify-center gap-3">
+          <span class="px-5 py-2 rounded-full bg-blue-100 text-blue-800 text-sm font-medium border border-blue-200 hover:bg-blue-200 transition cursor-default">Education (ECCD)</span>
+          <span class="px-5 py-2 rounded-full bg-rose-100 text-rose-800 text-sm font-medium border border-rose-200 hover:bg-rose-200 transition cursor-default">Health & Nutrition</span>
+          <span class="px-5 py-2 rounded-full bg-cyan-100 text-cyan-800 text-sm font-medium border border-cyan-200 hover:bg-cyan-200 transition cursor-default">WASH</span>
+          <span class="px-5 py-2 rounded-full bg-purple-100 text-purple-800 text-sm font-medium border border-purple-200 hover:bg-purple-200 transition cursor-default">ICT for Development</span>
+          <span class="px-5 py-2 rounded-full bg-green-100 text-green-800 text-sm font-medium border border-green-200 hover:bg-green-200 transition cursor-default">Agriculture & Environment</span>
+          <span class="px-5 py-2 rounded-full bg-amber-100 text-amber-800 text-sm font-medium border border-amber-200 hover:bg-amber-200 transition cursor-default">Governance</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Featured Work Section -->
-  <section id="work" class="py-20 lg:py-28 bg-gray-50">
+  <!-- Featured Work -->
+  <section id="work" class="py-24 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-14">
-        <span class="reveal text-accent font-semibold text-sm uppercase tracking-widest">Our Work</span>
-        <h2 class="reveal reveal-delay-1 text-3xl sm:text-4xl lg:text-5xl text-navy mt-4 mb-6">
-          Featured Projects
-        </h2>
-        <div class="section-accent reveal reveal-delay-2 mx-auto mb-6"></div>
-        <p class="reveal reveal-delay-3 text-gray-600 text-lg">
-          A selection of impactful research initiatives across diverse sectors and regions.
-        </p>
+      <div class="text-center mb-16">
+        <span class="reveal text-sm font-bold text-rose-600 uppercase tracking-widest">Our Impact</span>
+        <h2 class="reveal reveal-delay-1 text-3xl md:text-4xl lg:text-5xl text-gray-900 mt-2">Featured Research Projects</h2>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Project 1 -->
-        <div class="project-card reveal">
-          <div class="h-48 bg-gradient-to-br from-teal to-accent-dark relative overflow-hidden">
-            <div class="absolute inset-0 bg-black/20"></div>
-            <div class="absolute bottom-4 left-4">
-              <span class="project-tag">Livelihood</span>
-            </div>
+        <div class="reveal group">
+          <div class="relative overflow-hidden rounded-t-2xl h-52 bg-gradient-to-br from-blue-500 to-cyan-500">
+            <div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors"></div>
+            <div class="absolute top-4 left-4 px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-xs font-semibold">Livelihood</div>
           </div>
-          <div class="p-6">
-            <h3 class="text-lg font-semibold text-navy mb-2">Returnee Migrant Workers Study</h3>
-            <p class="text-gray-600 text-sm mb-4">Qualitative research examining reintegration challenges and opportunities for returnee migrant workers in Nepal.</p>
-            <div class="flex items-center justify-between text-sm">
-              <span class="text-accent font-medium">Helvetas</span>
+          <div class="bg-white p-6 rounded-b-2xl shadow-lg border border-t-0 border-gray-100">
+            <h3 class="text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">Returnee Migrant Workers Study</h3>
+            <p class="text-sm text-gray-500 mb-4">Qualitative research on reintegration challenges for migrant workers.</p>
+            <div class="flex justify-between items-center text-xs font-medium">
+              <span class="text-blue-600">Helvetas</span>
               <span class="text-gray-400">2024</span>
             </div>
           </div>
         </div>
 
         <!-- Project 2 -->
-        <div class="project-card reveal reveal-delay-1">
-          <div class="h-48 bg-gradient-to-br from-navy to-navy-mid relative overflow-hidden">
-            <div class="absolute inset-0 bg-black/20"></div>
-            <div class="absolute bottom-4 left-4">
-              <span class="project-tag">Education</span>
-            </div>
+        <div class="reveal reveal-delay-1 group">
+          <div class="relative overflow-hidden rounded-t-2xl h-52 bg-gradient-to-br from-purple-500 to-pink-500">
+            <div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors"></div>
+            <div class="absolute top-4 left-4 px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-xs font-semibold">Education</div>
           </div>
-          <div class="p-6">
-            <h3 class="text-lg font-semibold text-navy mb-2">Students with Hearing Impairment</h3>
-            <p class="text-gray-600 text-sm mb-4">Baseline and Endline data collection supporting educational interventions for hearing-impaired students.</p>
-            <div class="flex items-center justify-between text-sm">
-              <span class="text-accent font-medium">World Bank / NYU</span>
+          <div class="bg-white p-6 rounded-b-2xl shadow-lg border border-t-0 border-gray-100">
+            <h3 class="text-lg font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">Students with Hearing Impairment</h3>
+            <p class="text-sm text-gray-500 mb-4">Baseline and Endline data for hearing-impaired student interventions.</p>
+            <div class="flex justify-between items-center text-xs font-medium">
+              <span class="text-purple-600">World Bank / NYU</span>
               <span class="text-gray-400">2021</span>
             </div>
           </div>
         </div>
 
         <!-- Project 3 -->
-        <div class="project-card reveal reveal-delay-2">
-          <div class="h-48 bg-gradient-to-br from-gold to-gold-light relative overflow-hidden">
-            <div class="absolute inset-0 bg-black/20"></div>
-            <div class="absolute bottom-4 left-4">
-              <span class="project-tag">M&E</span>
-            </div>
+        <div class="reveal reveal-delay-2 group">
+          <div class="relative overflow-hidden rounded-t-2xl h-52 bg-gradient-to-br from-green-500 to-emerald-500">
+            <div class="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors"></div>
+            <div class="absolute top-4 left-4 px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-xs font-semibold">M&E</div>
           </div>
-          <div class="p-6">
-            <h3 class="text-lg font-semibold text-navy mb-2">Feed the Future Project</h3>
-            <p class="text-gray-600 text-sm mb-4">Independent monitoring and evaluation across 20 districts for USAID Nepal's food security initiative.</p>
-            <div class="flex items-center justify-between text-sm">
-              <span class="text-accent font-medium">USAID Nepal</span>
+          <div class="bg-white p-6 rounded-b-2xl shadow-lg border border-t-0 border-gray-100">
+            <h3 class="text-lg font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors">Feed the Future Project</h3>
+            <p class="text-sm text-gray-500 mb-4">Independent M&E across 20 districts for food security ($1.5M).</p>
+            <div class="flex justify-between items-center text-xs font-medium">
+              <span class="text-green-600">USAID Nepal</span>
               <span class="text-gray-400">2014-2019</span>
             </div>
-            <div class="mt-3 pt-3 border-t border-gray-100">
-              <span class="text-xs text-gray-500">Budget: $1.5 Million</span>
-            </div>
           </div>
-        </div>
-
-        <!-- Project 4 -->
-        <div class="project-card reveal reveal-delay-3">
-          <div class="h-48 bg-gradient-to-br from-rose-500 to-rose-600 relative overflow-hidden">
-            <div class="absolute inset-0 bg-black/20"></div>
-            <div class="absolute bottom-4 left-4">
-              <span class="project-tag">Education</span>
-            </div>
-          </div>
-          <div class="p-6">
-            <h3 class="text-lg font-semibold text-navy mb-2">Crisis Impact Monitoring</h3>
-            <p class="text-gray-600 text-sm mb-4">3F (Food, Fuel, Financial) crisis impact assessment on education access and outcomes.</p>
-            <div class="flex items-center justify-between text-sm">
-              <span class="text-accent font-medium">UNICEF</span>
-              <span class="text-gray-400">2009-2011</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 5 -->
-        <div class="project-card reveal reveal-delay-4">
-          <div class="h-48 bg-gradient-to-br from-emerald-500 to-emerald-600 relative overflow-hidden">
-            <div class="absolute inset-0 bg-black/20"></div>
-            <div class="absolute bottom-4 left-4 flex gap-2">
-              <span class="project-tag">Nutrition</span>
-              <span class="project-tag">WASH</span>
-            </div>
-          </div>
-          <div class="p-6">
-            <h3 class="text-lg font-semibold text-navy mb-2">Big Ideas Dahi Project</h3>
-            <p class="text-gray-600 text-sm mb-4">Promoting nutrition and WASH through behavior change communication interventions.</p>
-            <div class="flex items-center justify-between text-sm">
-              <span class="text-accent font-medium">UC Berkeley</span>
-              <span class="text-gray-400">2014-2015</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- CTA Card -->
-        <div class="project-card reveal reveal-delay-5 bg-gradient-to-br from-navy to-navy-mid flex flex-col justify-center items-center text-center p-8">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-accent mb-4">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-            <line x1="12" y1="18" x2="12" y2="12"/>
-            <line x1="9" y1="15" x2="15" y2="15"/>
-          </svg>
-          <h3 class="text-xl text-white mb-3">More Projects</h3>
-          <p class="text-gray-400 text-sm mb-6">Explore our complete portfolio of research initiatives and impact studies.</p>
-          <a href="#contact" class="btn-primary text-sm"><span>Request Portfolio</span></a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Team Section -->
-  <section id="team" class="py-20 lg:py-28 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-14">
-        <span class="reveal text-accent font-semibold text-sm uppercase tracking-widest">Our Team</span>
-        <h2 class="reveal reveal-delay-1 text-3xl sm:text-4xl lg:text-5xl text-navy mt-4 mb-6">
-          Expert Pool
-        </h2>
-        <div class="section-accent reveal reveal-delay-2 mx-auto mb-6"></div>
-        <p class="reveal reveal-delay-3 text-gray-600 text-lg">
-          RIDA maintains a vast pool of distinguished experts and consultants across disciplines.
-        </p>
+  <section id="team" class="py-24 bg-gray-900 text-white relative">
+     <!-- Abstract background shapes -->
+     <div class="absolute inset-0 overflow-hidden opacity-20">
+      <div class="absolute top-0 left-0 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl"></div>
+      <div class="absolute bottom-0 right-0 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-16">
+        <span class="reveal text-sm font-bold text-cyan-400 uppercase tracking-widest">The Team</span>
+        <h2 class="reveal reveal-delay-1 text-3xl md:text-4xl lg:text-5xl mt-2">Our Expert Pool</h2>
       </div>
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <!-- Expert 1 -->
-        <div class="team-card reveal">
-          <div class="team-avatar">
-            <span class="text-white text-2xl font-semibold" style="font-family: 'DM Serif Display', serif;">SL</span>
+        <div class="reveal bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-center hover:bg-white/10 transition-colors">
+          <div class="w-20 h-20 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl font-bold">
+            SL
           </div>
-          <h3 class="text-lg font-semibold text-navy">Dr. Shiva Raj Lohani</h3>
-          <p class="text-accent text-sm font-medium mb-2">PhD</p>
-          <p class="text-gray-600 text-sm">Technical Coordinator, Development Economics</p>
+          <h4 class="font-bold text-lg">Dr. Shiva Raj Lohani</h4>
+          <p class="text-cyan-300 text-sm mt-1">Technical Coordinator</p>
+          <p class="text-gray-400 text-xs mt-1">Development Economics</p>
         </div>
 
         <!-- Expert 2 -->
-        <div class="team-card reveal reveal-delay-1">
-          <div class="team-avatar">
-            <span class="text-white text-2xl font-semibold" style="font-family: 'DM Serif Display', serif;">DC</span>
+        <div class="reveal reveal-delay-1 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-center hover:bg-white/10 transition-colors">
+          <div class="w-20 h-20 bg-gradient-to-br from-green-400 to-emerald-400 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl font-bold">
+            DC
           </div>
-          <h3 class="text-lg font-semibold text-navy">Dr. DP Chapagain</h3>
-          <p class="text-accent text-sm font-medium mb-2">PhD</p>
-          <p class="text-gray-600 text-sm">Director / Senior Consultant, WASH</p>
+          <h4 class="font-bold text-lg">Dr. DP Chapagain</h4>
+          <p class="text-green-300 text-sm mt-1">Director / Senior Consultant</p>
+          <p class="text-gray-400 text-xs mt-1">WASH</p>
         </div>
 
         <!-- Expert 3 -->
-        <div class="team-card reveal reveal-delay-2">
-          <div class="team-avatar">
-            <span class="text-white text-2xl font-semibold" style="font-family: 'DM Serif Display', serif;">SR</span>
+        <div class="reveal reveal-delay-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-center hover:bg-white/10 transition-colors">
+          <div class="w-20 h-20 bg-gradient-to-br from-amber-400 to-orange-400 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl font-bold">
+            SR
           </div>
-          <h3 class="text-lg font-semibold text-navy">Sudarshan Rajbhandari</h3>
-          <p class="text-accent text-sm font-medium mb-2">MA</p>
-          <p class="text-gray-600 text-sm">Program Director, WASH and Education</p>
+          <h4 class="font-bold text-lg">Sudarshan Rajbhandari</h4>
+          <p class="text-amber-300 text-sm mt-1">Program Director</p>
+          <p class="text-gray-400 text-xs mt-1">WASH and Education</p>
         </div>
 
         <!-- Expert 4 -->
-        <div class="team-card reveal reveal-delay-3">
-          <div class="team-avatar">
-            <span class="text-white text-2xl font-semibold" style="font-family: 'DM Serif Display', serif;">MD</span>
+        <div class="reveal reveal-delay-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-center hover:bg-white/10 transition-colors">
+          <div class="w-20 h-20 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl font-bold">
+            MD
           </div>
-          <h3 class="text-lg font-semibold text-navy">Dr. Meenakshi Dahal</h3>
-          <p class="text-accent text-sm font-medium mb-2">PhD</p>
-          <p class="text-gray-600 text-sm">Senior Consultant, Education</p>
-        </div>
-
-        <!-- Expert 5 -->
-        <div class="team-card reveal reveal-delay-4">
-          <div class="team-avatar">
-            <span class="text-white text-2xl font-semibold" style="font-family: 'DM Serif Display', serif;">RT</span>
-          </div>
-          <h3 class="text-lg font-semibold text-navy">Dr. Resham Thapa</h3>
-          <p class="text-accent text-sm font-medium mb-2">PhD</p>
-          <p class="text-gray-600 text-sm">Consultant, Quantitative Analysis & Data Management</p>
-        </div>
-
-        <!-- More Experts -->
-        <div class="team-card reveal reveal-delay-5 bg-gray-50 border-dashed">
-          <div class="w-20 h-20 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gray-400">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-            </svg>
-          </div>
-          <h3 class="text-lg font-semibold text-navy mb-2">100+ Experts</h3>
-          <p class="text-gray-600 text-sm mb-4">Our extensive network of sector specialists</p>
-          <a href="#contact" class="text-accent text-sm font-medium hover:underline">Connect with us</a>
+          <h4 class="font-bold text-lg">Dr. Meenakshi Dahal</h4>
+          <p class="text-purple-300 text-sm mt-1">Senior Consultant</p>
+          <p class="text-gray-400 text-xs mt-1">Education</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Publications Section -->
-  <section class="py-20 bg-navy">
+  <!-- Testimonials -->
+  <section id="testimonials" class="py-24 bg-blue-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-14">
-        <span class="reveal text-accent-light font-semibold text-sm uppercase tracking-widest">Publications</span>
-        <h2 class="reveal reveal-delay-1 text-3xl sm:text-4xl lg:text-5xl text-white mt-4 mb-6">
-          Knowledge Sharing
-        </h2>
-        <div class="section-accent reveal reveal-delay-2 mx-auto"></div>
+      <div class="text-center mb-16">
+        <span class="reveal text-sm font-bold text-blue-600 uppercase tracking-widest">Recognition</span>
+        <h2 class="reveal reveal-delay-1 text-3xl md:text-4xl lg:text-5xl text-gray-900 mt-2">Partner Testimonials</h2>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-        <div class="pub-card reveal">
-          <div class="w-10 h-10 bg-accent/20 rounded-lg flex items-center justify-center mb-4">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-accent-light">
-              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-            </svg>
-          </div>
-          <h4 class="text-white font-semibold mb-2">RIDA Prospective</h4>
-          <p class="text-gray-400 text-sm">International Development Journal</p>
-        </div>
-
-        <div class="pub-card reveal reveal-delay-1">
-          <div class="w-10 h-10 bg-accent/20 rounded-lg flex items-center justify-center mb-4">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-accent-light">
-              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-            </svg>
-          </div>
-          <h4 class="text-white font-semibold mb-2">Development Journal</h4>
-          <p class="text-gray-400 text-sm">Research & Policy Insights</p>
-        </div>
-
-        <div class="pub-card reveal reveal-delay-2">
-          <div class="w-10 h-10 bg-gold/20 rounded-lg flex items-center justify-center mb-4">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gold-light">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-              <polyline points="22,6 12,13 2,6"/>
-            </svg>
-          </div>
-          <h4 class="text-white font-semibold mb-2">The Educationist</h4>
-          <p class="text-gray-400 text-sm">Monthly e-Newsletter</p>
-        </div>
-
-        <div class="pub-card reveal reveal-delay-3">
-          <div class="w-10 h-10 bg-gold/20 rounded-lg flex items-center justify-center mb-4">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-gold-light">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-              <polyline points="22,6 12,13 2,6"/>
-            </svg>
-          </div>
-          <h4 class="text-white font-semibold mb-2">The Development Observer</h4>
-          <p class="text-gray-400 text-sm">Weekly Newsletter</p>
-        </div>
-      </div>
-
-      <div class="reveal reveal-delay-4 mt-10 p-5 bg-white/5 border border-white/10 rounded-xl">
-        <div class="flex items-center gap-3">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-accent-light">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          </svg>
-          <p class="text-gray-300 text-sm">RIDA operates under standardized policies including Human Resource Manual, Financial Management Guidelines, and Disaster Risk Management Plan.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials Section -->
-  <section id="testimonials" class="py-20 lg:py-28 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-14">
-        <span class="reveal text-accent font-semibold text-sm uppercase tracking-widest">Testimonials</span>
-        <h2 class="reveal reveal-delay-1 text-3xl sm:text-4xl lg:text-5xl text-navy mt-4 mb-6">
-          What Partners Say
-        </h2>
-        <div class="section-accent reveal reveal-delay-2 mx-auto"></div>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="testimonial-card reveal">
-          <p class="text-gray-700 leading-relaxed mb-6 relative z-10">
-            "We are very much satisfied with the level of professionalism and expertise demonstrated by the RIDA team. Their rigorous methodology and attention to detail exceeded our expectations. RIDA is the best in business."
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="reveal bg-white p-8 rounded-2xl shadow-lg border border-gray-100 relative">
+          <svg class="absolute top-6 left-6 w-8 h-8 text-blue-100" fill="currentColor" viewBox="0 0 32 32"><path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2V8zm14 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z"/></svg>
+          <p class="text-gray-700 italic mb-6 relative z-10 pl-4 border-l-4 border-blue-200">
+            "Very much satisfied with the level of professionalism and expertise... RIDA is the best in business."
           </p>
           <div class="flex items-center gap-3">
-            <div class="w-11 h-11 bg-gradient-to-br from-accent to-accent-light rounded-full flex items-center justify-center">
-              <span class="text-white font-semibold text-sm">MH</span>
-            </div>
+            <div class="w-12 h-12 rounded-full bg-blue-200 text-blue-700 flex items-center justify-center font-bold">MH</div>
             <div>
-              <p class="font-semibold text-navy">Mike Hughes</p>
-              <p class="text-gray-500 text-sm">Development Partner</p>
+              <p class="font-bold text-gray-900">Mike Hughes</p>
+              <p class="text-xs text-gray-500">Development Partner</p>
             </div>
           </div>
         </div>
 
-        <div class="testimonial-card reveal reveal-delay-1">
-          <p class="text-gray-700 leading-relaxed mb-6 relative z-10">
-            "Highest level of work ethics and expertise. The team demonstrated exceptional analytical capabilities and delivered insights that fundamentally shaped our program strategy. Excellent pool of experts."
+        <div class="reveal reveal-delay-1 bg-white p-8 rounded-2xl shadow-lg border border-gray-100 relative">
+          <svg class="absolute top-6 left-6 w-8 h-8 text-green-100" fill="currentColor" viewBox="0 0 32 32"><path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2V8zm14 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z"/></svg>
+          <p class="text-gray-700 italic mb-6 relative z-10 pl-4 border-l-4 border-green-200">
+            "Highest level of work ethics and expertise. Excellent pool of experts."
           </p>
           <div class="flex items-center gap-3">
-            <div class="w-11 h-11 bg-gradient-to-br from-gold to-gold-light rounded-full flex items-center justify-center">
-              <span class="text-white font-semibold text-sm">RH</span>
-            </div>
+            <div class="w-12 h-12 rounded-full bg-green-200 text-green-700 flex items-center justify-center font-bold">RH</div>
             <div>
-              <p class="font-semibold text-navy">Rachel Hudson</p>
-              <p class="text-gray-500 text-sm">International NGO Director</p>
+              <p class="font-bold text-gray-900">Rachel Hudson</p>
+              <p class="text-xs text-gray-500">NGO Director</p>
             </div>
           </div>
         </div>
 
-        <div class="testimonial-card reveal reveal-delay-2">
-          <p class="text-gray-700 leading-relaxed mb-6 relative z-10">
-            "Great Team of professionals. Outstanding work delivering comprehensive research under tight timelines. Their commitment to quality and evidence-based insights makes them a trusted partner."
+        <div class="reveal reveal-delay-2 bg-white p-8 rounded-2xl shadow-lg border border-gray-100 relative">
+          <svg class="absolute top-6 left-6 w-8 h-8 text-purple-100" fill="currentColor" viewBox="0 0 32 32"><path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2V8zm14 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2V8z"/></svg>
+          <p class="text-gray-700 italic mb-6 relative z-10 pl-4 border-l-4 border-purple-200">
+            "Great Team of professionals. Outstanding work."
           </p>
           <div class="flex items-center gap-3">
-            <div class="w-11 h-11 bg-gradient-to-br from-navy to-navy-light rounded-full flex items-center justify-center">
-              <span class="text-white font-semibold text-sm">DH</span>
-            </div>
+            <div class="w-12 h-12 rounded-full bg-purple-200 text-purple-700 flex items-center justify-center font-bold">DH</div>
             <div>
-              <p class="font-semibold text-navy">Donald Hunter</p>
-              <p class="text-gray-500 text-sm">Development Consultant</p>
+              <p class="font-bold text-gray-900">Donald Hunter</p>
+              <p class="text-xs text-gray-500">Development Consultant</p>
             </div>
           </div>
         </div>
@@ -1140,157 +667,70 @@
     </div>
   </section>
 
-  <!-- CTA Section -->
-  <section class="py-20 bg-gradient-to-br from-accent via-teal to-accent-dark relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10">
-      <svg width="100%" height="100%" preserveAspectRatio="none">
-        <defs>
-          <pattern id="ctaGrid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <circle cx="20" cy="20" r="1.5" fill="white"/>
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" fill="url(#ctaGrid)"/>
-      </svg>
-    </div>
-
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-      <h2 class="reveal text-3xl sm:text-4xl lg:text-5xl text-white mb-6">
-        Together We Can
-      </h2>
-      <p class="reveal reveal-delay-1 text-xl text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed">
-        Let's collaborate on producing great research and studies that are fundamental and impactful. Let's join hands!
-      </p>
-      <div class="reveal reveal-delay-2 flex flex-wrap justify-center gap-4">
-        <a href="#contact" class="bg-white text-accent px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transition-all hover:shadow-xl hover:-translate-y-1">
-          Start a Conversation
-        </a>
-        <a href="#work" class="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-accent transition-all">
-          View Our Work
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="py-20 lg:py-28 bg-white">
+  <!-- Contact -->
+  <section id="contact" class="py-24 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20">
-        <div>
-          <span class="reveal text-accent font-semibold text-sm uppercase tracking-widest">Contact Us</span>
-          <h2 class="reveal reveal-delay-1 text-3xl sm:text-4xl lg:text-5xl text-navy mt-4 mb-6">
-            Get in Touch
-          </h2>
-          <div class="section-accent reveal reveal-delay-2 mb-8"></div>
-          <p class="reveal reveal-delay-3 text-gray-600 text-lg mb-10">
-            Ready to start your next research project? Reach out to discuss how we can support your development initiatives.
-          </p>
+      <div class="grid lg:grid-cols-5 gap-12 items-start">
+        <div class="lg:col-span-2">
+          <span class="reveal text-sm font-bold text-rose-600 uppercase tracking-widest">Contact</span>
+          <h2 class="reveal reveal-delay-1 text-3xl md:text-4xl lg:text-5xl text-gray-900 mt-2 mb-6">Let's Collaborate</h2>
+          <p class="reveal reveal-delay-2 text-gray-600 text-lg mb-8">Together we can, let's join hands!</p>
 
-          <div class="space-y-5">
-            <!-- Address -->
-            <div class="reveal reveal-delay-3 flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
-              <div class="w-11 h-11 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-accent">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                  <circle cx="12" cy="10" r="3"/>
-                </svg>
+          <div class="reveal reveal-delay-3 space-y-4">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0 text-blue-600">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
               </div>
               <div>
-                <p class="font-semibold text-navy text-sm">Headquarters</p>
-                <p class="text-gray-600 text-sm">Ward No. 4, Mahalaxmi Municipality, Imadol, Lalitpur, Kathmandu, Nepal</p>
+                <h4 class="font-bold text-gray-900">Headquarters</h4>
+                <p class="text-sm text-gray-600">Ward No. 4, Mahalaxmi Municipality, Imadol, Lalitpur, Kathmandu, Nepal</p>
               </div>
             </div>
 
-            <!-- Email -->
-            <div class="reveal reveal-delay-4 flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
-              <div class="w-11 h-11 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-accent">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                  <polyline points="22,6 12,13 2,6"/>
-                </svg>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0 text-green-600">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
               </div>
               <div>
-                <p class="font-semibold text-navy text-sm">Email</p>
-                <a href="mailto:contact@ridanepal.org.np" class="text-accent hover:underline text-sm block">contact@ridanepal.org.np</a>
-                <a href="mailto:ridanepal@gmail.com" class="text-accent hover:underline text-sm block">ridanepal@gmail.com</a>
+                <h4 class="font-bold text-gray-900">Phone</h4>
+                <p class="text-sm text-gray-600">+977-1-4570282 / +977-9749708307</p>
               </div>
             </div>
 
-            <!-- Phone -->
-            <div class="reveal reveal-delay-5 flex items-start gap-4 p-4 bg-gray-50 rounded-xl">
-              <div class="w-11 h-11 bg-accent/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-accent">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                </svg>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-rose-100 rounded-lg flex items-center justify-center flex-shrink-0 text-rose-600">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
               </div>
               <div>
-                <p class="font-semibold text-navy text-sm">Phone</p>
-                <p class="text-gray-600 text-sm">+977-1-4570282</p>
-                <p class="text-gray-600 text-sm">+977-1-5914597</p>
-                <p class="text-gray-600 text-sm">+977-9749708307</p>
-                <p class="text-gray-600 text-sm">+977-9841008655</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- International Offices -->
-          <div class="reveal reveal-delay-6 mt-8 p-5 bg-navy rounded-xl text-white">
-            <h4 class="font-semibold mb-4 text-sm">International Offices</h4>
-            <div class="grid sm:grid-cols-2 gap-4">
-              <div class="flex items-start gap-3">
-                <span class="text-lg">🇺🇸</span>
-                <div>
-                  <p class="font-medium text-sm">USA</p>
-                  <p class="text-gray-400 text-xs">Washington D.C. (C/O International Development Institute)</p>
-                </div>
-              </div>
-              <div class="flex items-start gap-3">
-                <span class="text-lg">🇧🇩</span>
-                <div>
-                  <p class="font-medium text-sm">Bangladesh</p>
-                  <p class="text-gray-400 text-xs">Dhaka (C/O Alternative Development Solutions)</p>
-                </div>
+                <h4 class="font-bold text-gray-900">Email</h4>
+                <p class="text-sm text-gray-600">contact@ridanepal.org.np</p>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Contact Form -->
-        <div class="reveal reveal-delay-2">
-          <form class="bg-gray-50 rounded-2xl p-6 sm:p-8 border border-gray-100" id="contactForm">
-            <div class="grid sm:grid-cols-2 gap-5 mb-5">
+        <div class="lg:col-span-3">
+          <form class="reveal reveal-delay-2 bg-gray-50 p-8 rounded-2xl border border-gray-100 shadow-sm">
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
               <div>
-                <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                <input type="text" id="name" name="name" required
-                  class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all bg-white"
-                  placeholder="Your name">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                <input type="text" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition" placeholder="Your name">
               </div>
               <div>
-                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
-                <input type="email" id="email" name="email" required
-                  class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all bg-white"
-                  placeholder="your@email.com">
+                <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                <input type="email" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition" placeholder="email@example.com">
               </div>
-            </div>
-            <div class="mb-5">
-              <label for="organization" class="block text-sm font-medium text-gray-700 mb-2">Organization</label>
-              <input type="text" id="organization" name="organization"
-                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all bg-white"
-                placeholder="Your organization">
-            </div>
-            <div class="mb-5">
-              <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
-              <input type="text" id="subject" name="subject" required
-                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all bg-white"
-                placeholder="How can we help?">
             </div>
             <div class="mb-6">
-              <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
-              <textarea id="message" name="message" rows="5" required
-                class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all resize-none bg-white"
-                placeholder="Tell us about your project..."></textarea>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+              <input type="text" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition" placeholder="How can we help?">
             </div>
-            <button type="submit" class="btn-primary w-full justify-center">
-              <span>Send Message</span>
+            <div class="mb-6">
+              <label class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+              <textarea rows="4" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition resize-none" placeholder="Your message..."></textarea>
+            </div>
+            <button type="submit" class="btn-primary w-full text-center">
+              Send Message
             </button>
           </form>
         </div>
@@ -1299,231 +739,116 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-navy py-16">
+  <footer class="bg-gray-900 text-white pt-16 pb-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-        <!-- Brand -->
-        <div class="sm:col-span-2 lg:col-span-1">
-          <div class="flex items-center gap-3 mb-5">
-            <div class="w-11 h-11 bg-gradient-to-br from-teal to-accent-light rounded-xl flex items-center justify-center">
-              <span class="text-white font-semibold text-lg" style="font-family: 'DM Serif Display', serif;">R</span>
+      <div class="grid md:grid-cols-4 gap-8 mb-12">
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-lg flex items-center justify-center">
+              <span class="font-bold text-lg">R</span>
             </div>
-            <div>
-              <span class="text-white font-semibold text-lg">RIDA</span>
-              <span class="block text-xs text-gray-400">Est. 1980</span>
-            </div>
+            <span class="font-bold text-xl">RIDA</span>
           </div>
-          <p class="text-gray-400 text-sm leading-relaxed mb-5">
-            Research Inputs and Development Action - Advancing evidence-based research for sustainable development across South Asia, Asia-Pacific, and Africa.
+          <p class="text-gray-400 text-sm mb-4 max-w-md">
+            Research Inputs and Development Action. Promoting evidence-based development initiatives since 1980.
           </p>
-          <div class="flex gap-3">
-            <a href="#" class="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center hover:bg-accent transition-colors" aria-label="Facebook">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="text-white">
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-              </svg>
+          <div class="flex gap-4">
+            <a href="#" class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors" aria-label="Facebook">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
             </a>
-            <a href="#" class="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center hover:bg-accent transition-colors" aria-label="Twitter">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="text-white">
-                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
-              </svg>
+            <a href="#" class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors" aria-label="Twitter">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
             </a>
-            <a href="#" class="w-9 h-9 bg-white/10 rounded-lg flex items-center justify-center hover:bg-accent transition-colors" aria-label="YouTube">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" class="text-white">
-                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
-                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
-              </svg>
+            <a href="#" class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors" aria-label="YouTube">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path></svg>
             </a>
           </div>
         </div>
-
-        <!-- Quick Links -->
+        
         <div>
-          <h4 class="text-white font-semibold mb-5 text-sm">Quick Links</h4>
-          <ul class="space-y-3">
-            <li><a href="#about" class="text-gray-400 text-sm hover:text-accent transition-colors">About Us</a></li>
-            <li><a href="#expertise" class="text-gray-400 text-sm hover:text-accent transition-colors">Our Expertise</a></li>
-            <li><a href="#work" class="text-gray-400 text-sm hover:text-accent transition-colors">Featured Projects</a></li>
-            <li><a href="#team" class="text-gray-400 text-sm hover:text-accent transition-colors">Our Team</a></li>
-            <li><a href="#testimonials" class="text-gray-400 text-sm hover:text-accent transition-colors">Testimonials</a></li>
+          <h4 class="font-bold mb-4 text-sm uppercase tracking-wider">Quick Links</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="#about" class="hover:text-cyan-400 transition-colors">About Us</a></li>
+            <li><a href="#expertise" class="hover:text-cyan-400 transition-colors">Services</a></li>
+            <li><a href="#work" class="hover:text-cyan-400 transition-colors">Projects</a></li>
+            <li><a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a></li>
           </ul>
         </div>
 
-        <!-- Services -->
         <div>
-          <h4 class="text-white font-semibold mb-5 text-sm">Services</h4>
-          <ul class="space-y-3">
-            <li><a href="#expertise" class="text-gray-400 text-sm hover:text-accent transition-colors">Policy Research</a></li>
-            <li><a href="#expertise" class="text-gray-400 text-sm hover:text-accent transition-colors">M&E Services</a></li>
-            <li><a href="#expertise" class="text-gray-400 text-sm hover:text-accent transition-colors">BCC Programs</a></li>
-            <li><a href="#expertise" class="text-gray-400 text-sm hover:text-accent transition-colors">Economic Analysis</a></li>
-            <li><a href="#expertise" class="text-gray-400 text-sm hover:text-accent transition-colors">Proxy Means Testing</a></li>
-          </ul>
-        </div>
-
-        <!-- Contact -->
-        <div>
-          <h4 class="text-white font-semibold mb-5 text-sm">Contact</h4>
-          <ul class="space-y-3 text-gray-400 text-sm">
-            <li class="flex items-start gap-2">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-accent mt-1 flex-shrink-0">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                <circle cx="12" cy="10" r="3"/>
-              </svg>
-              <span>Imadol, Lalitpur, Nepal</span>
-            </li>
-            <li class="flex items-center gap-2">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-accent flex-shrink-0">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-              </svg>
-              <span>+977-1-4570282</span>
-            </li>
+          <h4 class="font-bold mb-4 text-sm uppercase tracking-wider">Resources</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="#" class="hover:text-cyan-400 transition-colors">Publications</a></li>
+            <li><a href="#" class="hover:text-cyan-400 transition-colors">Newsletters</a></li>
+            <li><a href="#" class="hover:text-cyan-400 transition-colors">Careers</a></li>
           </ul>
         </div>
       </div>
 
-      <!-- Bottom -->
-      <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-        <p class="text-gray-500 text-sm">
-          2024 Research Inputs and Development Action (RIDA). All rights reserved.
-        </p>
-        <p class="text-accent text-sm font-medium">
-          Looking for internship? Give us a call.
-        </p>
+      <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-gray-500 text-xs">© 2024 Research Inputs and Development Action (RIDA). All rights reserved.</p>
+        <p class="text-cyan-400 font-semibold text-sm">Looking for internship? Give us a call.</p>
       </div>
     </div>
   </footer>
 
   <script>
-    // Initialize DOM elements
-    const mainNav = document.getElementById('mainNav');
-    const menuToggle = document.getElementById('menuToggle');
-    const closeNav = document.getElementById('closeNav');
-    const mobileNav = document.getElementById('mobileNav');
-    const navItems = document.querySelectorAll('.nav-item');
-    const contactForm = document.getElementById('contactForm');
-    const statValues = document.querySelectorAll('.stat-value');
-    const revealElements = document.querySelectorAll('.reveal');
+    // Mobile Menu
+    const menuBtn = document.getElementById('menuBtn');
+    const closeBtn = document.getElementById('closeBtn');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
 
-    // Navbar scroll effect
+    menuBtn.addEventListener('click', () => mobileDrawer.classList.add('open'));
+    closeBtn.addEventListener('click', () => mobileDrawer.classList.remove('open'));
+    mobileLinks.forEach(link => link.addEventListener('click', () => mobileDrawer.classList.remove('open')));
+
+    // Navbar Background on Scroll
+    const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 80) {
-        mainNav.style.background = 'rgba(12, 18, 34, 0.95)';
-        mainNav.style.backdropFilter = 'blur(12px)';
-        mainNav.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.2)';
+      if (window.scrollY > 50) {
+        navbar.classList.add('shadow-lg');
       } else {
-        mainNav.style.background = 'transparent';
-        mainNav.style.backdropFilter = 'none';
-        mainNav.style.boxShadow = 'none';
+        navbar.classList.remove('shadow-lg');
       }
     });
 
-    // Mobile menu toggle
-    menuToggle.addEventListener('click', () => {
-      mobileNav.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    });
-
-    closeNav.addEventListener('click', () => {
-      mobileNav.classList.remove('open');
-      document.body.style.overflow = '';
-    });
-
-    navItems.forEach(item => {
-      item.addEventListener('click', () => {
-        mobileNav.classList.remove('open');
-        document.body.style.overflow = '';
-      });
-    });
-
-    // Scroll reveal
-    const revealObserver = new IntersectionObserver((entries) => {
+    // Scroll Reveal
+    const revealElements = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
         }
       });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -40px 0px'
-    });
+    }, { threshold: 0.1 });
 
-    revealElements.forEach(el => revealObserver.observe(el));
+    revealElements.forEach(el => observer.observe(el));
 
-    // Counter animation
+    // Counter Animation
+    const counters = document.querySelectorAll('.counter');
     const counterObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          const target = parseInt(entry.target.getAttribute('data-count'));
-          animateCount(entry.target, target);
+          const target = parseInt(entry.target.getAttribute('data-target'));
+          let current = 0;
+          const increment = target / 50;
+          const updateCounter = () => {
+            if (current < target) {
+              current += increment;
+              entry.target.textContent = Math.ceil(current) + '+';
+              requestAnimationFrame(updateCounter);
+            } else {
+              entry.target.textContent = target + '+';
+            }
+          };
+          updateCounter();
           counterObserver.unobserve(entry.target);
         }
       });
     }, { threshold: 0.5 });
 
-    statValues.forEach(stat => counterObserver.observe(stat));
-
-    function animateCount(element, target) {
-      const duration = 2000;
-      const startTime = performance.now();
-
-      function update(currentTime) {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 4);
-        const current = Math.floor(target * eased);
-        
-        element.textContent = current + '+';
-        
-        if (progress < 1) {
-          requestAnimationFrame(update);
-        }
-      }
-      
-      requestAnimationFrame(update);
-    }
-
-    // Form handling
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const btn = contactForm.querySelector('button[type="submit"]');
-      const originalHTML = btn.innerHTML;
-      
-      btn.innerHTML = '<span>Sending...</span>';
-      btn.disabled = true;
-      
-      setTimeout(() => {
-        btn.innerHTML = '<span>Message Sent!</span>';
-        btn.style.background = 'linear-gradient(135deg, #059669, #10b981)';
-        
-        setTimeout(() => {
-          btn.innerHTML = originalHTML;
-          btn.style.background = '';
-          btn.disabled = false;
-          contactForm.reset();
-        }, 2500);
-      }, 1500);
-    });
-
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          const offset = 90;
-          const targetPos = target.getBoundingClientRect().top + window.pageYOffset - offset;
-          window.scrollTo({ top: targetPos, behavior: 'smooth' });
-        }
-      });
-    });
-
-    // Check reduced motion preference
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      document.querySelectorAll('.orb, .grid-pattern').forEach(el => {
-        el.style.animation = 'none';
-      });
-    }
+    counters.forEach(counter => counterObserver.observe(counter));
   </script>
 </body>
 </html>
