@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RIDA - Research Inputs & Development Action</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --bg-dark: #0f172a;
+      --fg: #1e293b;
+      --fg-light: #64748b;
+      --muted: #94a3b8;
+      --accent: #0d9488;
+      --accent-light: #14b8a6;
+      --card: #ffffff;
+      --card-dark: #1e293b;
+      --border: #e2e8f0;
+      --navy: #0f172a;
+      --navy-light: #1e293b;
+      --gold: #d97706;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'DM Serif Display', serif;
+      font-weight: 400;
+    }
+
+    /* Data visualization background pattern */
+    .data-pattern {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .data-pattern svg {
+      width: 100%;
+      height: 100%;
+      opacity: 0.08;
+    }
+
+    /* Hero background with gradient and pattern */
+    .hero-bg {
+      background: linear-gradient(135deg, var(--navy) 0%, #1e3a5f 50%, #0f172a 100%);
+      position: relative;
+    }
+
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(13, 148, 136, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(217, 119, 6, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 60% 80%, rgba(13, 148, 136, 0.1) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    /* Floating particles */
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: float 20s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+      25% { transform: translateY(-30px) translateX(10px); opacity: 0.6; }
+      50% { transform: translateY(-15px) translateX(-15px); opacity: 0.4; }
+      75% { transform: translateY(-40px) translateX(5px); opacity: 0.5; }
+    }
+
+    /* Scroll reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+    .reveal-delay-6 { transition-delay: 0.6s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+      .particle {
+        animation: none;
+      }
+    }
+
+    /* Navigation */
+    .nav-link {
+      position: relative;
+      color: rgba(255, 255, 255, 0.8);
+      transition: color 0.3s ease;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: #ffffff;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Service cards */
+    .service-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 0;
+      background: linear-gradient(180deg, var(--accent), var(--gold));
+      transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.15);
+      border-color: var(--accent);
+    }
+
+    .service-card:hover::before {
+      height: 100%;
+    }
+
+    .service-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .service-card:hover .service-icon {
+      transform: scale(1.1) rotate(-5deg);
+    }
+
+    /* Testimonial cards */
+    .testimonial-card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 2.5rem;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      font-family: 'DM Serif Display', serif;
+      font-size: 8rem;
+      position: absolute;
+      top: -20px;
+      left: 20px;
+      color: var(--accent);
+      opacity: 0.15;
+      line-height: 1;
+    }
+
+    /* Stats counter */
+    .stat-number {
+      font-family: 'DM Serif Display', serif;
+      font-size: 3.5rem;
+      background: linear-gradient(135deg, #ffffff, var(--accent-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Button styles */
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--accent-light), var(--accent));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(13, 148, 136, 0.4);
+    }
+
+    .btn-primary:hover::before {
+      opacity: 1;
+    }
+
+    .btn-primary span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-outline {
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline:hover {
+      background: var(--accent);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Section divider */
+    .section-divider {
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--gold));
+      border-radius: 2px;
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: var(--navy);
+      z-index: 100;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .mobile-menu.open {
+      transform: translateX(0);
+    }
+
+    /* Focus states */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 4px;
+    }
+
+    /* Map visualization placeholder */
+    .map-visual {
+      background: linear-gradient(135deg, var(--navy-light), var(--navy));
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-dot {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse-dot 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 0.5; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="navbar">
+    <div class="max-w-7xl mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <a href="#" class="flex items-center gap-3" aria-label="RIDA Home">
+          <div class="w-12 h-12 bg-gradient-to-br from-accent to-teal-400 rounded-lg flex items-center justify-center">
+            <span class="text-white font-bold text-lg" style="font-family: 'DM Serif Display', serif;">R</span>
+          </div>
+          <div class="hidden sm:block">
+            <span class="text-white font-semibold text-lg">RIDA</span>
+            <span class="text-xs text-gray-400 block -mt-1">Since 1980</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden lg:flex items-center gap-8">
+          <a href="#home" class="nav-link text-sm font-medium">Home</a>
+          <a href="#about" class="nav-link text-sm font-medium">About</a>
+          <a href="#focus" class="nav-link text-sm font-medium">Our Focus</a>
+          <a href="#work" class="nav-link text-sm font-medium">Our Work</a>
+          <a href="#testimonials" class="nav-link text-sm font-medium">Testimonials</a>
+          <a href="#contact" class="btn-primary text-sm"><span>Contact Us</span></a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="lg:hidden text-white p-2" id="menuBtn" aria-label="Open menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu lg:hidden" id="mobileMenu">
+    <div class="p-6">
+      <div class="flex justify-between items-center mb-12">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 bg-gradient-to-br from-accent to-teal-400 rounded-lg flex items-center justify-center">
+            <span class="text-white font-bold text-lg" style="font-family: 'DM Serif Display', serif;">R</span>
+          </div>
+          <span class="text-white font-semibold text-lg">RIDA</span>
+        </div>
+        <button id="closeMenuBtn" class="text-white p-2" aria-label="Close menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="flex flex-col gap-6">
+        <a href="#home" class="text-white text-2xl font-medium mobile-link">Home</a>
+        <a href="#about" class="text-white text-2xl font-medium mobile-link">About</a>
+        <a href="#focus" class="text-white text-2xl font-medium mobile-link">Our Focus</a>
+        <a href="#work" class="text-white text-2xl font-medium mobile-link">Our Work</a>
+        <a href="#testimonials" class="text-white text-2xl font-medium mobile-link">Testimonials</a>
+        <a href="#contact" class="text-white text-2xl font-medium mobile-link">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero-bg min-h-screen flex items-center relative overflow-hidden">
+    <!-- Animated particles -->
+    <div class="particle" style="width: 6px; height: 6px; background: rgba(13, 148, 136, 0.4); top: 20%; left: 10%; animation-delay: 0s;"></div>
+    <div class="particle" style="width: 8px; height: 8px; background: rgba(217, 119, 6, 0.3); top: 40%; left: 85%; animation-delay: 2s;"></div>
+    <div class="particle" style="width: 5px; height: 5px; background: rgba(13, 148, 136, 0.5); top: 70%; left: 15%; animation-delay: 4s;"></div>
+    <div class="particle" style="width: 10px; height: 10px; background: rgba(13, 148, 136, 0.3); top: 30%; left: 70%; animation-delay: 1s;"></div>
+    <div class="particle" style="width: 7px; height: 7px; background: rgba(217, 119, 6, 0.4); top: 80%; left: 60%; animation-delay: 3s;"></div>
+    <div class="particle" style="width: 4px; height: 4px; background: rgba(13, 148, 136, 0.6); top: 15%; left: 50%; animation-delay: 5s;"></div>
+
+    <!-- Data pattern overlay -->
+    <div class="data-pattern">
+      <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+            <circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.3)"/>
+            <line x1="0" y1="25" x2="50" y2="25" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+            <line x1="25" y1="0" x2="25" y2="50" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)"/>
+      </svg>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 py-32 relative z-10">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <div class="reveal">
+            <span class="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-teal-300 text-sm font-medium mb-6">
+              40+ Years of Excellence
+            </span>
+          </div>
+          <h1 class="reveal reveal-delay-1 text-4xl md:text-5xl lg:text-6xl text-white leading-tight mb-6">
+            Research Inputs & Development Action
+          </h1>
+          <p class="reveal reveal-delay-2 text-xl md:text-2xl text-teal-300 mb-4" style="font-family: 'DM Serif Display', serif;">
+            Advancing Evidence Based Research
+          </p>
+          <p class="reveal reveal-delay-3 text-gray-300 text-lg leading-relaxed mb-10 max-w-xl">
+            Serving our clients for over 40 years. Since 1980, we have produced invaluable research insights instrumental to developmental endeavors in Nepal and abroad.
+          </p>
+          <div class="reveal reveal-delay-4 flex flex-wrap gap-4">
+            <a href="#about" class="btn-primary"><span>Learn More</span></a>
+            <a href="#contact" class="btn-outline border-white/30 text-white hover:bg-white hover:text-navy">Get in Touch</a>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="reveal reveal-delay-5 grid grid-cols-2 gap-6">
+          <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+            <div class="stat-number" data-target="40">0</div>
+            <p class="text-gray-400 mt-2">Years of Excellence</p>
+          </div>
+          <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+            <div class="stat-number" data-target="500">0</div>
+            <p class="text-gray-400 mt-2">Projects Completed</p>
+          </div>
+          <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+            <div class="stat-number" data-target="30">0</div>
+            <p class="text-gray-400 mt-2">Countries Served</p>
+          </div>
+          <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
+            <div class="stat-number" data-target="100">0</div>
+            <p class="text-gray-400 mt-2">Expert Researchers</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50 animate-bounce">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M19 12l-7 7-7-7"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-24 bg-white relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-gray-50 to-transparent"></div>
+    
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <span class="reveal text-accent font-semibold text-sm uppercase tracking-wider">About RIDA</span>
+          <h2 class="reveal reveal-delay-1 text-3xl md:text-4xl lg:text-5xl text-navy mt-4 mb-6">
+            Pioneering Research for Development
+          </h2>
+          <div class="section-divider reveal reveal-delay-2 mb-8"></div>
+          <p class="reveal reveal-delay-3 text-gray-600 text-lg leading-relaxed mb-6">
+            RIDA is a Nepal-based international research firm with extensive expertise in research, evaluation, assessment, and advocacy. For over four decades, we have been at the forefront of generating evidence-based insights that shape development policies and programs.
+          </p>
+          <p class="reveal reveal-delay-4 text-gray-600 text-lg leading-relaxed mb-8">
+            Our mission is to help government and non-state actors design, implement, and evaluate development initiatives that create lasting impact. We combine rigorous methodology with deep contextual understanding to deliver actionable insights.
+          </p>
+          
+          <div class="reveal reveal-delay-5 flex items-center gap-4 p-4 bg-gray-50 rounded-xl">
+            <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-accent">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+            </div>
+            <div>
+              <p class="font-semibold text-navy">Global Presence</p>
+              <p class="text-gray-500 text-sm">South Asia, Asia-Pacific, and Africa</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map visualization -->
+        <div class="reveal reveal-delay-3">
+          <div class="map-visual aspect-square max-w-md mx-auto lg:ml-auto p-8">
+            <div class="relative w-full h-full">
+              <!-- Stylized world map dots -->
+              <div class="map-dot" style="top: 35%; left: 70%; animation-delay: 0s;" title="Nepal"></div>
+              <div class="map-dot" style="top: 30%; left: 65%; animation-delay: 0.3s;" title="India"></div>
+              <div class="map-dot" style="top: 40%; left: 75%; animation-delay: 0.6s;" title="Bangladesh"></div>
+              <div class="map-dot" style="top: 55%; left: 80%; animation-delay: 0.9s;" title="Southeast Asia"></div>
+              <div class="map-dot" style="top: 70%; left: 75%; animation-delay: 1.2s;" title="Africa"></div>
+              <div class="map-dot" style="top: 45%; left: 85%; animation-delay: 1.5s;" title="Asia-Pacific"></div>
+              
+              <!-- Connecting lines -->
+              <svg class="absolute inset-0 w-full h-full" viewBox="0 0 200 200">
+                <line x1="140" y1="70" x2="130" y2="60" stroke="rgba(13, 148, 136, 0.3)" stroke-width="1"/>
+                <line x1="140" y1="70" x2="150" y2="80" stroke="rgba(13, 148, 136, 0.3)" stroke-width="1"/>
+                <line x1="140" y1="70" x2="170" y2="90" stroke="rgba(13, 148, 136, 0.3)" stroke-width="1"/>
+                <line x1="140" y1="70" x2="155" y2="110" stroke="rgba(13, 148, 136, 0.3)" stroke-width="1"/>
+              </svg>
+              
+              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+                <div class="w-20 h-20 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center">
+                    <span class="text-white font-bold">NP</span>
+                  </div>
+                </div>
+                <p class="text-white font-medium">Headquarters</p>
+                <p class="text-gray-400 text-sm">Kathmandu, Nepal</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services/Focus Section -->
+  <section id="focus" class="py-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="reveal text-accent font-semibold text-sm uppercase tracking-wider">Our Expertise</span>
+        <h2 class="reveal reveal-delay-1 text-3xl md:text-4xl lg:text-5xl text-navy mt-4 mb-6">
+          Areas of Focus
+        </h2>
+        <div class="section-divider reveal reveal-delay-2 mx-auto mb-6"></div>
+        <p class="reveal reveal-delay-3 text-gray-600 text-lg">
+          We bring specialized expertise across the full spectrum of development research and analysis.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Service 1 -->
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+          </div>
+          <h3 class="text-xl text-navy mb-3">Development Policy Research & Advocacy</h3>
+          <p class="text-gray-600">Evidence-based policy analysis and strategic advocacy to influence development agendas at national and regional levels.</p>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="service-card reveal reveal-delay-1">
+          <div class="service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          </div>
+          <h3 class="text-xl text-navy mb-3">Monitoring and Evaluation</h3>
+          <p class="text-gray-600">Comprehensive M&E frameworks and impact assessments that measure effectiveness and inform program improvements.</p>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="service-card reveal reveal-delay-2">
+          <div class="service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <line x1="18" y1="20" x2="18" y2="10"/>
+              <line x1="12" y1="20" x2="12" y2="4"/>
+              <line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+          </div>
+          <h3 class="text-xl text-navy mb-3">Qualitative & Quantitative Research</h3>
+          <p class="text-gray-600">Rigorous mixed-methods research combining statistical analysis with in-depth qualitative insights.</p>
+        </div>
+
+        <!-- Service 4 -->
+        <div class="service-card reveal reveal-delay-3">
+          <div class="service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <h3 class="text-xl text-navy mb-3">Behavior Change Communication</h3>
+          <p class="text-gray-600">Strategic communication interventions designed to influence behaviors and improve development outcomes.</p>
+        </div>
+
+        <!-- Service 5 -->
+        <div class="service-card reveal reveal-delay-4">
+          <div class="service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <line x1="12" y1="1" x2="12" y2="23"/>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </div>
+          <h3 class="text-xl text-navy mb-3">Financial, Economical & Social Analysis</h3>
+          <p class="text-gray-600">In-depth analysis of economic and social dynamics to inform investment decisions and policy frameworks.</p>
+        </div>
+
+        <!-- Service 6 -->
+        <div class="service-card reveal reveal-delay-5">
+          <div class="service-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <path d="M3 3v18h18"/>
+              <path d="M18 17V9"/>
+              <path d="M13 17V5"/>
+              <path d="M8 17v-3"/>
+            </svg>
+          </div>
+          <h3 class="text-xl text-navy mb-3">Identification of Poor & Proxy Means Testing</h3>
+          <p class="text-gray-600">Scientific identification methodologies and targeting mechanisms for social protection programs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Work Section (Placeholder) -->
+  <section id="work" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="reveal text-accent font-semibold text-sm uppercase tracking-wider">Our Work</span>
+        <h2 class="reveal reveal-delay-1 text-3xl md:text-4xl lg:text-5xl text-navy mt-4 mb-6">
+          Featured Projects
+        </h2>
+        <div class="section-divider reveal reveal-delay-2 mx-auto mb-6"></div>
+        <p class="reveal reveal-delay-3 text-gray-600 text-lg">
+          A selection of our impactful research initiatives across various sectors and regions.
+        </p>
+      </div>
+
+      <!-- Placeholder project cards -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="reveal group cursor-pointer">
+          <div class="aspect-[4/3] bg-gradient-to-br from-navy to-slate-700 rounded-2xl mb-4 overflow-hidden relative">
+            <div class="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="absolute bottom-4 left-4 right-4">
+              <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-xs">Education</span>
+            </div>
+          </div>
+          <h3 class="text-lg font-semibold text-navy group-hover:text-accent transition-colors">Educational Assessment Program</h3>
+          <p class="text-gray-500 text-sm mt-2">Nepal · 2023</p>
+        </div>
+
+        <div class="reveal reveal-delay-1 group cursor-pointer">
+          <div class="aspect-[4/3] bg-gradient-to-br from-teal-600 to-teal-800 rounded-2xl mb-4 overflow-hidden relative">
+            <div class="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="absolute bottom-4 left-4 right-4">
+              <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-xs">Health</span>
+            </div>
+          </div>
+          <h3 class="text-lg font-semibold text-navy group-hover:text-accent transition-colors">Health Systems Strengthening Study</h3>
+          <p class="text-gray-500 text-sm mt-2">Bangladesh · 2023</p>
+        </div>
+
+        <div class="reveal reveal-delay-2 group cursor-pointer">
+          <div class="aspect-[4/3] bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl mb-4 overflow-hidden relative">
+            <div class="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="absolute bottom-4 left-4 right-4">
+              <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-xs">Social Protection</span>
+            </div>
+          </div>
+          <h3 class="text-lg font-semibold text-navy group-hover:text-accent transition-colors">Poverty Mapping Initiative</h3>
+          <p class="text-gray-500 text-sm mt-2">Multi-country · 2022</p>
+        </div>
+      </div>
+
+      <div class="reveal text-center mt-12">
+        <p class="text-gray-500 italic">Additional case studies coming soon...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="py-24 bg-navy relative overflow-hidden">
+    <!-- Background pattern -->
+    <div class="absolute inset-0 opacity-5">
+      <svg width="100%" height="100%">
+        <pattern id="testimonial-pattern" width="60" height="60" patternUnits="userSpaceOnUse">
+          <circle cx="30" cy="30" r="1.5" fill="white"/>
+        </pattern>
+        <rect width="100%" height="100%" fill="url(#testimonial-pattern)"/>
+      </svg>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="reveal text-teal-400 font-semibold text-sm uppercase tracking-wider">Testimonials</span>
+        <h2 class="reveal reveal-delay-1 text-3xl md:text-4xl lg:text-5xl text-white mt-4 mb-6">
+          What Our Partners Say
+        </h2>
+        <div class="section-divider reveal reveal-delay-2 mx-auto"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <!-- Testimonial 1 -->
+        <div class="testimonial-card reveal">
+          <p class="text-gray-700 text-lg leading-relaxed mb-6 relative z-10">
+            "We are very much satisfied with the level of professionalism and expertise demonstrated by the RIDA team. Their rigorous methodology and attention to detail exceeded our expectations. RIDA is the best in business."
+          </p>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-accent to-teal-400 rounded-full flex items-center justify-center">
+              <span class="text-white font-semibold">MH</span>
+            </div>
+            <div>
+              <p class="font-semibold text-navy">Mike Hughes</p>
+              <p class="text-gray-500 text-sm">Development Partner</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testimonial-card reveal reveal-delay-1">
+          <p class="text-gray-700 text-lg leading-relaxed mb-6 relative z-10">
+            "Highest level of work ethics and expertise. The team demonstrated exceptional analytical capabilities and delivered insights that fundamentally shaped our program strategy. Excellent pool of experts."
+          </p>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-gold to-amber-500 rounded-full flex items-center justify-center">
+              <span class="text-white font-semibold">RH</span>
+            </div>
+            <div>
+              <p class="font-semibold text-navy">Rachel Hudson</p>
+              <p class="text-gray-500 text-sm">International NGO Director</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-24 bg-gradient-to-br from-accent via-teal-600 to-teal-700 relative overflow-hidden">
+    <div class="absolute inset-0">
+      <svg width="100%" height="100%" preserveAspectRatio="none">
+        <defs>
+          <pattern id="cta-pattern" width="40" height="40" patternUnits="userSpaceOnUse">
+            <circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.1)"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#cta-pattern)"/>
+      </svg>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+      <h2 class="reveal text-3xl md:text-4xl lg:text-5xl text-white mb-6">
+        Let's Collaborate
+      </h2>
+      <p class="reveal reveal-delay-1 text-xl text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed">
+        Let's collaborate on producing great research and studies that are fundamental and impactful. Together we can, let's join hands!
+      </p>
+      <div class="reveal reveal-delay-2 flex flex-wrap justify-center gap-4">
+        <a href="#contact" class="bg-white text-accent px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all hover:transform hover:-translate-y-1 hover:shadow-xl">
+          Start a Conversation
+        </a>
+        <a href="#work" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-accent transition-all">
+          View Our Work
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16">
+        <div>
+          <span class="reveal text-accent font-semibold text-sm uppercase tracking-wider">Contact Us</span>
+          <h2 class="reveal reveal-delay-1 text-3xl md:text-4xl lg:text-5xl text-navy mt-4 mb-6">
+            Get in Touch
+          </h2>
+          <div class="section-divider reveal reveal-delay-2 mb-8"></div>
+          <p class="reveal reveal-delay-3 text-gray-600 text-lg mb-10">
+            Ready to start your next research project? Reach out to discuss how we can support your development initiatives.
+          </p>
+
+          <div class="space-y-6">
+            <div class="reveal reveal-delay-3 flex items-start gap-4">
+              <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-accent">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div>
+                <p class="font-semibold text-navy">Address</p>
+                <p class="text-gray-600">Ward No. 4, Mahalaxmi Municipality, Imadol, Lalitpur, Kathmandu, Nepal</p>
+              </div>
+            </div>
+
+            <div class="reveal reveal-delay-4 flex items-start gap-4">
+              <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-accent">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div>
+                <p class="font-semibold text-navy">Email</p>
+                <a href="mailto:contact@ridanepal.org.np" class="text-accent hover:underline">contact@ridanepal.org.np</a>
+              </div>
+            </div>
+
+            <div class="reveal reveal-delay-5 flex items-start gap-4">
+              <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-accent">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+              </div>
+              <div>
+                <p class="font-semibold text-navy">Phone</p>
+                <a href="tel:+977-1-4570282" class="text-accent hover:underline">+977-1-4570282</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="reveal">
+          <form class="bg-gray-50 rounded-2xl p-8" id="contactForm">
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+              <div>
+                <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                <input type="text" id="name" name="name" required
+                  class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all"
+                  placeholder="Your name">
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                <input type="email" id="email" name="email" required
+                  class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all"
+                  placeholder="your@email.com">
+              </div>
+            </div>
+            <div class="mb-6">
+              <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+              <input type="text" id="subject" name="subject" required
+                class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all"
+                placeholder="How can we help?">
+            </div>
+            <div class="mb-6">
+              <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+              <textarea id="message" name="message" rows="5" required
+                class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all resize-none"
+                placeholder="Tell us about your project..."></textarea>
+            </div>
+            <button type="submit" class="btn-primary w-full">
+              <span>Send Message</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-navy py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <!-- Logo & Description -->
+        <div class="lg:col-span-2">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="w-12 h-12 bg-gradient-to-br from-accent to-teal-400 rounded-lg flex items-center justify-center">
+              <span class="text-white font-bold text-lg" style="font-family: 'DM Serif Display', serif;">R</span>
+            </div>
+            <div>
+              <span class="text-white font-semibold text-lg">RIDA</span>
+              <span class="text-xs text-gray-400 block -mt-1">Research Inputs & Development Action</span>
+            </div>
+          </div>
+          <p class="text-gray-400 leading-relaxed max-w-md mb-6">
+            Advancing evidence-based research for sustainable development since 1980. Serving clients across South Asia, Asia-Pacific, and Africa.
+          </p>
+          <div class="flex gap-4">
+            <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-accent transition-colors" aria-label="Facebook">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-white">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+            </a>
+            <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-accent transition-colors" aria-label="Twitter">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-white">
+                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+              </svg>
+            </a>
+            <a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-accent transition-colors" aria-label="YouTube">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-white">
+                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>
+                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="text-white font-semibold mb-6">Quick Links</h4>
+          <ul class="space-y-3">
+            <li><a href="#about" class="text-gray-400 hover:text-accent transition-colors">About Us</a></li>
+            <li><a href="#focus" class="text-gray-400 hover:text-accent transition-colors">Our Focus</a></li>
+            <li><a href="#work" class="text-gray-400 hover:text-accent transition-colors">Our Work</a></li>
+            <li><a href="#testimonials" class="text-gray-400 hover:text-accent transition-colors">Testimonials</a></li>
+            <li><a href="#contact" class="text-gray-400 hover:text-accent transition-colors">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Info -->
+        <div>
+          <h4 class="text-white font-semibold mb-6">Contact</h4>
+          <ul class="space-y-3 text-gray-400">
+            <li class="flex items-start gap-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-accent mt-1 flex-shrink-0">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              <span>Imadol, Lalitpur, Nepal</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-accent flex-shrink-0">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+              <a href="mailto:contact@ridanepal.org.np" class="hover:text-accent transition-colors">contact@ridanepal.org.np</a>
+            </li>
+            <li class="flex items-center gap-2">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-accent flex-shrink-0">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              <a href="tel:+977-1-4570282" class="hover:text-accent transition-colors">+977-1-4570282</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-gray-500 text-sm">
+          2024 RIDA. All rights reserved.
+        </p>
+        <p class="text-accent text-sm font-medium">
+          Looking for internship? Give us a call.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize all variables before use
+    const navbar = document.getElementById('navbar');
+    const menuBtn = document.getElementById('menuBtn');
+    const closeMenuBtn = document.getElementById('closeMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+    const contactForm = document.getElementById('contactForm');
+
+    // Navbar scroll effect
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      
+      if (currentScroll > 100) {
+        navbar.style.background = 'rgba(15, 23, 42, 0.95)';
+        navbar.style.backdropFilter = 'blur(10px)';
+        navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.2)';
+      } else {
+        navbar.style.background = 'transparent';
+        navbar.style.backdropFilter = 'none';
+        navbar.style.boxShadow = 'none';
+      }
+      
+      lastScroll = currentScroll;
+    });
+
+    // Mobile menu
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+
+    closeMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Scroll reveal animation
+    const revealElements = document.querySelectorAll('.reveal');
+    
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Counter animation
+    const statNumbers = document.querySelectorAll('.stat-number');
+    
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const target = parseInt(entry.target.getAttribute('data-target'));
+          animateCounter(entry.target, target);
+          counterObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    statNumbers.forEach(stat => counterObserver.observe(stat));
+
+    function animateCounter(element, target) {
+      const duration = 2000;
+      const start = 0;
+      const startTime = performance.now();
+      
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Easing function
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const current = Math.floor(start + (target - start) * easeOut);
+        
+        element.textContent = current + '+';
+        
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        }
+      }
+      
+      requestAnimationFrame(update);
+    }
+
+    // Form submission
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+      
+      submitBtn.innerHTML = '<span>Sending...</span>';
+      submitBtn.disabled = true;
+      
+      // Simulate form submission
+      setTimeout(() => {
+        submitBtn.innerHTML = '<span>Message Sent!</span>';
+        submitBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+        
+        setTimeout(() => {
+          submitBtn.innerHTML = originalText;
+          submitBtn.style.background = '';
+          submitBtn.disabled = false;
+          contactForm.reset();
+        }, 2000);
+      }, 1500);
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const offset = 80;
+          const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Parallax effect for hero particles (subtle)
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    if (!prefersReducedMotion) {
+      const particles = document.querySelectorAll('.particle');
+      
+      document.addEventListener('mousemove', (e) => {
+        const mouseX = e.clientX / window.innerWidth;
+        const mouseY = e.clientY / window.innerHeight;
+        
+        particles.forEach((particle, index) => {
+          const speed = (index + 1) * 0.5;
+          const x = (mouseX - 0.5) * speed * 20;
+          const y = (mouseY - 0.5) * speed * 20;
+          particle.style.transform = `translate(${x}px, ${y}px)`;
+        });
+      });
+    }
+  </script>
+</body>
+</html>
