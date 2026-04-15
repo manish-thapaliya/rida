@@ -1,0 +1,215 @@
+Here is a simple, line-by-line User Guide to help you edit the website code provided above.
+
+---
+
+### **1. Basic Page Settings (Head Section)**
+*Locate the top of the code inside the `<head>` tags.*
+
+**A. Change the Browser Tab Icon (Favicon)**
+*   **Find this line:**
+    ```html
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/...png">
+    ```
+*   **What to change:** Replace the URL inside `href="..."` with the link to your new icon image.
+*   **Effect:** Updates the small icon visible in the browser tab next to the title.
+
+**B. Change the Browser Tab Title**
+*   **Find this line:**
+    ```html
+    <title>RIDA - Scientific Research & Development Action</title>
+    ```
+*   **What to change:** Edit the text between `<title>` and `</title>`.
+*   **Effect:** Changes the name shown in the browser tab and Google search results.
+
+**C. Change Website Colors (Global)**
+*   **Find this block:**
+    ```css
+    :root {
+      --accent-blue: #2563EB;
+      --accent-cyan: #06B6D4;
+      ...
+    }
+    ```
+*   **What to change:** Change the color codes (e.g., `#2563EB`) to your preferred colors.
+*   **Effect:** This automatically updates the color of buttons, highlights, and icons throughout the entire website.
+
+---
+
+### **2. Navigation & Logo**
+*Locate the `<nav>` section.*
+
+**A. Change the Main Logo**
+*   **Find this line:**
+    ```html
+    <img src="https://raw.githubusercontent.com/...png" alt="RIDA Logo" class="h-24 w-auto...">
+    ```
+*   **What to change:**
+    1.  Replace the `src="..."` URL with your logo link.
+    2.  Change `h-24` to adjust height (e.g., `h-16` for smaller, `h-32` for larger).
+*   **Effect:** Updates the logo in the top menu bar.
+
+**B. Change Menu Links**
+*   **Find this line:**
+    ```html
+    <a href="#about" class="nav-link...">About</a>
+    ```
+*   **What to change:**
+    1.  Change `href="#about"` to point to a different section ID.
+    2.  Change the text `About` to rename the button.
+*   **Effect:** Changes where the menu button scrolls to when clicked.
+
+---
+
+### **3. Hero Section (Top Banner)**
+*Locate `<section id="home">`.*
+
+**A. Change the Main Headline**
+*   **Find this line:**
+    ```html
+    <h1 ...>Research Inputs &<br><span...>Development Action</span></h1>
+    ```
+*   **What to change:** Edit the text "Research Inputs &" and "Development Action".
+*   **Effect:** Changes the big main title on the homepage.
+
+**B. Change Statistics Numbers**
+*   **Find this line:**
+    ```html
+    <h3 ... counter" data-target="40">0</h3>
+    ```
+*   **What to change:** Change `data-target="40"` to any number you want (e.g., `50`).
+*   **Effect:** The counter will animate and stop at your new number.
+
+---
+
+### **4. About Section**
+*Locate `<section id="about">`.*
+
+**A. Change Vision or Mission Text**
+*   **Find this line:**
+    ```html
+    <h4 class="font-bold...">Our Vision</h4>
+    <p class="text-sm...">Promoting evidence-based...</p>
+    ```
+*   **What to change:** Edit the text inside the `<p>` tag.
+*   **Effect:** Updates the description text in the "About Us" area.
+
+**B. Change Map Location Names**
+*   **Find this line:**
+    ```html
+    <div ...>Nepal (HQ)</div>
+    ```
+*   **What to change:** Edit "Nepal (HQ)" to change the tooltip text that appears when hovering over the map dots.
+
+---
+
+### **5. Expertise (Services) Section**
+*Locate `<section id="expertise">`.*
+
+**A. Add/Remove Services**
+*   **Find this block (starts with `<div class="reveal card-3d...">`):**
+    ```html
+    <!-- Service 1 -->
+    <div class="reveal card-3d p-6...">
+      <h3>Development Policy Research</h3>
+      <p>Evidence-based policy...</p>
+    </div>
+    ```
+*   **What to change:**
+    1.  To edit: Change the text inside `<h3>` and `<p>`.
+    2.  To add: Copy the entire `<div>...</div>` block and paste it below the others.
+*   **Effect:** Updates the service cards.
+
+**B. Change Service Icon Color**
+*   **Find this line:**
+    ```html
+    <div class="service-icon-box bg-blue-100 text-blue-600...">
+    ```
+*   **What to change:** Change `bg-blue-100` (background) and `text-blue-600` (icon color).
+    *   Example: Change to `bg-green-100 text-green-600` for green.
+*   **Effect:** Changes the color of the icon box for that service.
+
+---
+
+### **6. Projects Section**
+*Locate `<section id="work">`.*
+
+**A. Change Project Background Color**
+*   **Find this line:**
+    ```html
+    <div class="... bg-gradient-to-br from-blue-500 to-cyan-500">
+    ```
+*   **What to change:** Change `from-blue-500` and `to-cyan-500` to other colors (e.g., `from-red-500 to-orange-500`).
+*   **Effect:** Changes the placeholder image color for the project card.
+
+**B. Update Project Details**
+*   **Find this line:**
+    ```html
+    <span class="text-blue-600">Helvetas</span>
+    <span class="text-gray-400">2024</span>
+    ```
+*   **What to change:** Edit "Helvetas" (Client Name) and "2024" (Year).
+*   **Effect:** Updates the footer of the project card.
+
+---
+
+### **7. Team Section**
+*Locate `<section id="team">`.*
+
+**A. Change Team Member Initials**
+*   **Find this line:**
+    ```html
+    <div class="... rounded-full ...">SL</div>
+    ```
+*   **What to change:** Change "SL" to the new team member's initials.
+*   **Effect:** Changes the letters inside the circle avatar.
+
+**B. Change Avatar Color**
+*   **Find this line:**
+    ```html
+    <div class="w-20 h-20 bg-gradient-to-br from-blue-400 to-cyan-400...">
+    ```
+*   **What to change:** Change `from-blue-400` and `to-cyan-400` to match the member's department color.
+*   **Effect:** Changes the color of the circular background.
+
+---
+
+### **8. Contact Section**
+*Locate `<section id="contact">`.*
+
+**A. Update Contact Details**
+*   **Find this line:**
+    ```html
+    <p class="text-sm text-gray-600">+977-1-4570282...</p>
+    ```
+*   **What to change:** Edit the phone number, email, or address text.
+*   **Effect:** Updates the contact information displayed.
+
+**B. Make the Form Work**
+*   **Find this line:**
+    ```html
+    <form class="reveal reveal-delay-2...">
+    ```
+*   **What to change:** You need to add an action URL.
+    *   Change it to: `<form action="https://formspree.io/f/YOUR_ID" method="POST">`
+    *   *(You need to sign up for Formspree or similar service to get a URL).*
+*   **Effect:** Allows the form to actually send emails when the "Send Message" button is clicked.
+
+---
+
+### **9. Footer**
+*Locate `<footer>`.*
+
+**A. Update Social Media Links**
+*   **Find this line:**
+    ```html
+    <a href="#" class="... aria-label="Facebook">
+    ```
+*   **What to change:** Replace `href="#"` with your actual Facebook page URL (e.g., `href="https://facebook.com/ridanepal"`).
+*   **Effect:** Makes the social icons clickable.
+
+**B. Update Copyright Year**
+*   **Find this line:**
+    ```html
+    <p class="text-gray-500...">© 2024 Research Inputs...</p>
+    ```
+*   **What to change:** Update "2024" to the current year.
