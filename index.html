@@ -4,7 +4,7 @@
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/manish-thapaliya/rida/main/RIDA%20logo%20(1).png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RIDA - Research Inputs & Development Action (RIDA)</title>
+  <title>RIDA - Research Inputs & Development Action</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -260,7 +260,8 @@
   </nav>
 
   <!-- Mobile Drawer -->
-  <div id="mobileDrawer" class="mobile-drawer fixed inset-0 z-60 bg-gray-900/95 backdrop-blur-lg lg:hidden">
+  <!-- Fix: Changed z-60 to z-[60] for Tailwind compatibility -->
+  <div id="mobileDrawer" class="mobile-drawer fixed inset-0 z-[60] bg-gray-900/95 backdrop-blur-lg lg:hidden">
     <div class="p-6 h-full flex flex-col">
       <div class="flex justify-between items-center mb-10">
         <img src="https://raw.githubusercontent.com/manish-thapaliya/rida/main/RIDA%20logo%20(1).png" alt="RIDA Logo" class="h-20 w-auto object-contain">
@@ -376,19 +377,21 @@
             <div class="relative h-64 bg-white rounded-xl border border-gray-200 overflow-hidden">
               <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/World_map_blank_without_borders.svg/1280px-World_map_blank_without_borders.svg.png" class="w-full h-full object-contain opacity-20" alt="World Map">
               
-<div class="absolute top-[34%] left-[66%] transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer">
-  
-  <!-- Label -->
-  <span class="absolute -top-6 left-1/2 -translate-x-1/2 text-xs bg-black text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition">
-    Nepal
-  </span>
+              <!-- Fix: Cleaned up map marker structure -->
+              <div class="absolute top-[34%] left-[66%] transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer">
+                
+                <!-- Label -->
+                <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20">
+                  Nepal (HQ)
+                </div>
 
-  <!-- Dot -->
-  <div class="w-3 h-3 bg-blue-600 rounded-full"></div>
+                <!-- Ping Animation -->
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div class="w-4 h-4 bg-blue-600 rounded-full animate-ping opacity-75"></div>
+                </div>
 
-</div>                <div class="w-4 h-4 bg-blue-600 rounded-full animate-ping absolute opacity-75"></div>
-                <div class="w-4 h-4 bg-blue-600 rounded-full relative z-10 border-2 border-white"></div>
-                <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Nepal (HQ)</div>
+                <!-- Dot -->
+                <div class="relative w-3 h-3 bg-blue-600 rounded-full border-2 border-white z-10"></div>
               </div>
             </div>
           </div>
@@ -718,59 +721,46 @@
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <div class="reveal reveal-delay-1 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-center hover:bg-white/10 transition-colors">
-<img src="https://raw.githubusercontent.com/manish-thapaliya/rida/main/RIDA%20logo%20(1).png"
-     alt="RIDA Logo"
-     class="w-20 h-20 rounded-full mx-auto mb-4 object-cover bg-white p-2 border border-white/20">  
-          <h4 class="font-bold text-lg">Mr. Pankaj Raj Joshi</h4>
+          <img src="https://raw.githubusercontent.com/manish-thapaliya/rida/main/RIDA%20logo%20(1).png" alt="RIDA Logo" class="w-20 h-20 rounded-full mx-auto mb-4 object-cover bg-white p-2 border border-white/20">  
+          <h4 class="font-bold text-lg">Pankaj Raj Joshi</h4>
           <p class="text-cyan-300 text-sm mt-1">Chairperson</p>
         </div>
 
         <div class="reveal reveal-delay-1 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-center hover:bg-white/10 transition-colors">
-        <img src="https://raw.githubusercontent.com/manish-thapaliya/rida/main/RIDA%20logo%20(1).png"
-     alt="RIDA Logo"
-     class="w-20 h-20 rounded-full mx-auto mb-4 object-cover bg-white p-2 border border-white/20">
-          <h4 class="font-bold text-lg">Shiva Raj Lohani, Phd</h4>
+          <img src="https://raw.githubusercontent.com/manish-thapaliya/rida/main/RIDA%20logo%20(1).png" alt="RIDA Logo" class="w-20 h-20 rounded-full mx-auto mb-4 object-cover bg-white p-2 border border-white/20">
+          <!-- Fix: Typo corrected from Phd to PhD -->
+          <h4 class="font-bold text-lg">Shiva Raj Lohani, PhD</h4>
           <p class="text-green-300 text-sm mt-1">Technical Advisor</p>
         </div>
 
-
         <div class="reveal reveal-delay-1 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-center hover:bg-white/10 transition-colors">
-        <img src="https://raw.githubusercontent.com/manish-thapaliya/rida/main/RIDA%20logo%20(1).png"
-     alt="RIDA Logo"
-     class="w-20 h-20 rounded-full mx-auto mb-4 object-cover bg-white p-2 border border-white/20">
+          <img src="https://raw.githubusercontent.com/manish-thapaliya/rida/main/RIDA%20logo%20(1).png" alt="RIDA Logo" class="w-20 h-20 rounded-full mx-auto mb-4 object-cover bg-white p-2 border border-white/20">
           <h4 class="font-bold text-lg">Binod Kumar Guragain</h4>
           <p class="text-green-300 text-sm mt-1">Senior Consultant</p>
         </div>
         
         <div class="reveal reveal-delay-1 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-center hover:bg-white/10 transition-colors">
-        <img src="https://raw.githubusercontent.com/manish-thapaliya/rida/main/RIDA%20logo%20(1).png"
-     alt="RIDA Logo"
-     class="w-20 h-20 rounded-full mx-auto mb-4 object-cover bg-white p-2 border border-white/20">
+          <img src="https://raw.githubusercontent.com/manish-thapaliya/rida/main/RIDA%20logo%20(1).png" alt="RIDA Logo" class="w-20 h-20 rounded-full mx-auto mb-4 object-cover bg-white p-2 border border-white/20">
           <h4 class="font-bold text-lg">Sudarshan Raj Bhandari</h4>
           <p class="text-green-300 text-sm mt-1">Senior Consultant</p>
         </div>
 
         <div class="reveal reveal-delay-1 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-center hover:bg-white/10 transition-colors">
-        <img src="https://raw.githubusercontent.com/manish-thapaliya/rida/main/RIDA%20logo%20(1).png"
-     alt="RIDA Logo"
-     class="w-20 h-20 rounded-full mx-auto mb-4 object-cover bg-white p-2 border border-white/20">
+          <img src="https://raw.githubusercontent.com/manish-thapaliya/rida/main/RIDA%20logo%20(1).png" alt="RIDA Logo" class="w-20 h-20 rounded-full mx-auto mb-4 object-cover bg-white p-2 border border-white/20">
           <h4 class="font-bold text-lg">Bishwo Raj Joshi</h4>
           <p class="text-green-300 text-sm mt-1">Senior Consultant</p>
         </div>
 
         <div class="reveal reveal-delay-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-center hover:bg-white/10 transition-colors">
-        <img src="https://raw.githubusercontent.com/manish-thapaliya/rida/main/RIDA%20logo%20(1).png"
-     alt="RIDA Logo"
-     class="w-20 h-20 rounded-full mx-auto mb-4 object-cover bg-white p-2 border border-white/20">
+          <img src="https://raw.githubusercontent.com/manish-thapaliya/rida/main/RIDA%20logo%20(1).png" alt="RIDA Logo" class="w-20 h-20 rounded-full mx-auto mb-4 object-cover bg-white p-2 border border-white/20">
           <h4 class="font-bold text-lg">Manish Thapaliya</h4>
           <p class="text-amber-300 text-sm mt-1">Program Director</p>
         </div>
 
         <div class="reveal reveal-delay-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-center hover:bg-white/10 transition-colors">
-         <img src="https://raw.githubusercontent.com/manish-thapaliya/rida/main/RIDA%20logo%20(1).png"
-     alt="RIDA Logo"
-     class="w-20 h-20 rounded-full mx-auto mb-4 object-cover bg-white p-2 border border-white/20">
-          <h4 class="font-bold text-lg">Meenakshi Dahal, Phd</h4>
+          <img src="https://raw.githubusercontent.com/manish-thapaliya/rida/main/RIDA%20logo%20(1).png" alt="RIDA Logo" class="w-20 h-20 rounded-full mx-auto mb-4 object-cover bg-white p-2 border border-white/20">
+          <!-- Fix: Typo corrected from Phd to PhD -->
+          <h4 class="font-bold text-lg">Meenakshi Dahal, PhD</h4>
           <p class="text-purple-300 text-sm mt-1">Senior Consultant</p>
         </div>
       </div>
@@ -819,89 +809,54 @@
           </div>
         </div>
 
-       <div class="lg:col-span-3">
-  <form id="contactForm" class="reveal reveal-delay-2 bg-gray-50 p-8 rounded-2xl border border-gray-100 shadow-sm">
-    
-    <div class="grid md:grid-cols-2 gap-6 mb-6">
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Name *</label>
-        <input type="text" name="Name" required class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition" placeholder="Your name">
-      </div>
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
-        <input type="email" name="Email" required class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition" placeholder="email@example.com">
+        <div class="lg:col-span-3">
+          <form id="contactForm" class="reveal reveal-delay-2 bg-gray-50 p-8 rounded-2xl border border-gray-100 shadow-sm">
+            
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Name *</label>
+                <input type="text" name="Name" required class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition" placeholder="Your name">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                <input type="email" name="Email" required class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition" placeholder="email@example.com">
+              </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Organization</label>
+                <input type="text" name="Organization" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition" placeholder="Your organization">
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Inquiry Type</label>
+                <select name="Inquiry_Type" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition">
+                  <option value="General Inquiry">General Inquiry</option>
+                  <option value="Project Proposal">Project Proposal</option>
+                  <option value="Collaboration">Collaboration Request</option>
+                  <option value="Career">Career Inquiry</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <label class="block text-sm font-medium text-gray-700 mb-1">Subject *</label>
+              <input type="text" name="Subject" required class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition" placeholder="Subject of your message">
+            </div>
+            
+            <div class="mb-6">
+              <label class="block text-sm font-medium text-gray-700 mb-1">Message *</label>
+              <textarea rows="4" name="Message" required class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition resize-none" placeholder="Your message..."></textarea>
+            </div>
+            
+            <button type="submit" class="btn-primary w-full text-center">
+              Send Inquiry
+            </button>
+          </form>
+        </div>
       </div>
     </div>
-    
-    <div class="grid md:grid-cols-2 gap-6 mb-6">
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Organization</label>
-        <input type="text" name="Organization" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition" placeholder="Your organization">
-      </div>
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Inquiry Type</label>
-        <select name="Inquiry_Type" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition">
-          <option value="General Inquiry">General Inquiry</option>
-          <option value="Project Proposal">Project Proposal</option>
-          <option value="Collaboration">Collaboration Request</option>
-          <option value="Career">Career Inquiry</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="mb-6">
-      <label class="block text-sm font-medium text-gray-700 mb-1">Subject *</label>
-      <input type="text" name="Subject" required class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition" placeholder="Subject of your message">
-    </div>
-    
-    <div class="mb-6">
-      <label class="block text-sm font-medium text-gray-700 mb-1">Message *</label>
-      <textarea rows="4" name="Message" required class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition resize-none" placeholder="Your message..."></textarea>
-    </div>
-    
-    <button type="submit" class="btn-primary w-full text-center">
-      Send Inquiry
-    </button>
-  </form>
-</div>
-
-<script>
-document.getElementById("contactForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-
-  const form = e.target;
-
-  const data = {
-    Name: form.Name.value,
-    Email: form.Email.value,
-    Organization: form.Organization.value,
-    Inquiry_Type: form.Inquiry_Type.value,
-    Subject: form.Subject.value,
-    Message: form.Message.value
-  };
-
-  fetch("https://script.google.com/macros/s/AKfycbwtulNWGKHJw_ulokUBW1j7CCQU1VVND1o7ZhQWsE5fBoY4gk8PkAEr91P7hsmFdOzWaw/exec", {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  })
-  .then(res => res.json())
-  .then(response => {
-    if (response.result === "success") {
-      alert("✅ Message sent successfully!");
-      form.reset();
-    } else {
-      alert("❌ Error: " + response.error);
-    }
-  })
-  .catch(err => {
-    alert("❌ Something went wrong!");
-    console.error(err);
-  });
-});
-</script>
+  </section>
 
   <!-- Footer -->
   <footer class="bg-gray-900 text-white pt-16 pb-8">
@@ -1069,6 +1024,43 @@ document.getElementById("contactForm").addEventListener("submit", function(e) {
                 }
             });
         });
+    });
+
+    // Contact Form Submission
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const form = e.target;
+
+      const data = {
+        Name: form.Name.value,
+        Email: form.Email.value,
+        Organization: form.Organization.value,
+        Inquiry_Type: form.Inquiry_Type.value,
+        Subject: form.Subject.value,
+        Message: form.Message.value
+      };
+
+      fetch("https://script.google.com/macros/s/AKfycbwtulNWGKHJw_ulokUBW1j7CCQU1VVND1o7ZhQWsE5fBoY4gk8PkAEr91P7hsmFdOzWaw/exec", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      .then(res => res.json())
+      .then(response => {
+        if (response.result === "success") {
+          alert("✅ Message sent successfully!");
+          form.reset();
+        } else {
+          alert("❌ Error: " + response.error);
+        }
+      })
+      .catch(err => {
+        alert("❌ Something went wrong!");
+        console.error(err);
+      });
     });
   </script>
 </body>
